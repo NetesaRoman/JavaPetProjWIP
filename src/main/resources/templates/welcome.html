@@ -3,7 +3,7 @@
 <head >
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/style.css}">
-    <title>Title</title>
+    <title>Welcome</title>
 </head>
 <body>
 <div id ="Name">
@@ -12,8 +12,8 @@
 <p>Some text goes here...</p>
 </div>
 <div id = "Buttons">
-<button class="button">Login</button>
-<button class="button">Sign up</button>
+    <form th:action="@{/login}" method="get"><button type = submit class="button" >Login</button></form>
+    <form th:action="@{/registration}" method="get"><button type = submit class="button" >Sign up</button></form>
 </div>
 <footer>
     <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>

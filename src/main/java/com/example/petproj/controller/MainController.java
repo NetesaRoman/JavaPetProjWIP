@@ -15,4 +15,14 @@ public class MainController {
     public String welcome(){
         return "welcome";
     }
+
+    @GetMapping("/registration")
+    public String registration(){
+        return "registration";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "login";
+    }
 }
