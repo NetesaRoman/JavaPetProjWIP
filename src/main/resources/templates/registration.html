@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head >
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/mainstyle.css}">
+    <title>Registration</title>
+</head>
+<body>
+<div id="RegistrationForm">
+    <h3>Registration form</h3>
+    <form>
+
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name">
+
+                <label for="surname">Second Name:</label>
+                <input type="text" id="surname" name="surname">
+
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone">
+
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email">
+
+                <label for="password1">Password:</label>
+                <input type="password" id="password1" name="password1">
+
+                <label for="password2">Confirm password:</label>
+                <input type="password" id="password2" name="password2">
+
+                 <input type="submit"  value="submit">
+    </form>
+</div>
+
+
+
+<footer>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
+    <div style="width: 33%;  height: 100%; display: flex; align-items: center; justify-content: center; border-left: 1px solid #fff; border-right: 1px solid #fff;">
+        <p style = "font-size: 16px; color: white;">some txt about project like: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: right;">
+        <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 16px;">
+            <li><a href="https://github.com/NetesaRoman" style="color: #fff;">My github</a></li>
+            <li><a href="#" style="color: #fff;"> Ссылка 2</a></li>
+            <li><a href="#" style="color: #fff;">Ссылка 3</a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>

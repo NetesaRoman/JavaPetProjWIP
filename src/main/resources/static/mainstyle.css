@@ -1,0 +1,153 @@
+
+
+h1 {
+    font-family: NanumMyeongjo, serif;
+    color: #fff;
+    text-align: center;
+    font-size: 56px;
+
+}
+hr {
+    border: none;
+    border-top: 1px solid #fff;
+    margin: 20px auto;
+    width: 40%;
+}
+
+
+footer p {
+    font-family: NanumMyeongjo, serif;
+    color: #fff;
+    text-align: center;
+    font-size: 24px;
+}
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #003711;
+    color: #fff;
+    text-align: center;
+    font-size: 9px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 120px;
+    margin-top: 55%;
+
+}
+
+.button {
+
+    background-color: #9DFCBB;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    width: 250px;
+    height: 100px;
+    font-size: 24px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+.button:hover {
+    background-color: #2ecc71;
+}
+.button:active {
+    background-color: #27ae60;
+    color: white;
+}
+
+#Buttons{
+    margin-left: 35%;
+}
+
+#RegistrationForm{
+    width: 400px;
+    height: 500px;
+    margin-top: 10%;
+    margin-left: 40%;
+    background-color: #9DFCBB;
+    border: 1px solid black;
+    padding: 20px;
+    font-family: NanumMyeongjo,serif;
+    color: black;
+}
+
+
+#RegistrationForm input[type="submit"] {
+
+    width: 150px;
+    height: 45px;
+    margin-top: 40px;
+    margin-left: 64%;
+    background-color: #006620;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+
+    cursor: pointer;
+}
+
+#RegistrationForm input[type="submit"]:hover {
+    background-color: #004d1a;
+}
+
+#RegistrationForm input[type="submit"]:active {
+    background-color: #003311;
+}
+
+#RegistrationForm label{
+    display: block;
+}
+
+#RegistrationForm input {
+    width: 100%;
+    height: 30px;
+}
+
+#LoginForm{
+    margin-top: 10%;
+    margin-left: 40%;
+    width: 400px;
+    height: 300px;
+
+    background-color: #9DFCBB;
+    border: 1px solid black;
+    padding: 20px;
+    font-family: NanumMyeongjo,serif;
+    color: black;
+}
+
+
+#LoginForm input[type="submit"] {
+
+    width: 150px;
+    height: 45px;
+    margin-top: 40px;
+    margin-left: 64%;
+    background-color: #006620;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+
+    cursor: pointer;
+}
+
+#LoginForm input[type="submit"]:hover {
+    background-color: #004d1a;
+}
+
+#LoginForm input[type="submit"]:active {
+    background-color: #003311;
+}
+
+#LoginForm label{
+    display: block;
+}
+
+#LoginForm input {
+    width: 100%;
+    height: 30px;
+}
