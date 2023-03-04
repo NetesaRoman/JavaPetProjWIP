@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head >
     <meta charset="UTF-8">
-    <link rel="stylesheet" th:href="@{/mainstyle.css}">
+    <link rel="stylesheet" th:href="@{/styles/mainstyle.css}">
     <title>Registration</title>
 </head>
 <body>
 <div id="LoginForm">
     <h3>Login</h3>
-    <form>
+    <form th:action="@{/login}" method="post">
 
                 <label for="email">E-mail:</label>
                 <input type="email" id="email" name="email">
