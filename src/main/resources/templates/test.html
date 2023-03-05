@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head >
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/styles/style.css}">
+    <title>Welcome</title>
+</head>
+<body>
+<div id ="Name">
+<h1>Welcome to My Website</h1>
+<hr/>
+<p>Some text goes here...</p>
+</div>
+<div id = "Buttons">
+    <form th:action="@{/login}" method="get"><button type = submit class="button" >Login</button></form>
+    <form th:action="@{/registration}" method="get"><button type = submit class="button" >Sign up</button></form>
+</div>
+<footer>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
+    <div style="width: 33%;  height: 100%; display: flex; align-items: center; justify-content: center; border-left: 1px solid #fff; border-right: 1px solid #fff;">
+        <p style = "font-size: 16px; color: white;">some txt about project like: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: right;">
+        <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 16px;">
+            <li><a href="https://github.com/NetesaRoman" style="color: #fff;">My github</a></li>
+            <li><a href="#" style="color: #fff;"> Ссылка 2</a></li>
+            <li><a href="#" style="color: #fff;">Ссылка 3</a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>
