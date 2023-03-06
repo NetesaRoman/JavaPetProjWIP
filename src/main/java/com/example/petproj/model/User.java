@@ -39,6 +39,9 @@ public class User {
     private String password;
 
     @Column
+    private String matchingPassword;
+
+    @Column
     @Enumerated(EnumType.STRING)
     private UserRole role;
 }

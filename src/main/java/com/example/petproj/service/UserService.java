@@ -20,21 +20,31 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-    public UserDto createUser(UserDto userDto) {
+
+
+    public boolean hasUserByName(String name) {
+        return  userRepository.existsUserByName(name);
+    }
+
+    public User registerNewUserAccount(UserDto userDto)  {
+        if (emailExists(userDto.getEmail())) {
+//            throw new UserAlreadyExistException("There is an account with that email address: "
+//                    + userDto.getEmail());
+        }
+
+        // the rest of the registration operation
         User user = new User();
         user.setName(userDto.getName());
         user.setSecondName(userDto.getSecondName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
-//        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        userRepository.save(user);
-        userDto.setId(user.getId());
 
-        return userDto;
+        return userRepository.save(user);
     }
 
-    public boolean hasUserByName(String name) {
-        return  userRepository.existsUserByName(name);
+
+    private boolean emailExists(String email) {
+        return userRepository.findByEmail(email) != null;
     }
 }
