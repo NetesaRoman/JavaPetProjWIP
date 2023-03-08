@@ -1,3 +1,5 @@
+
+
 body {
     background: url('../img/bg.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -15,7 +17,7 @@ body::before {
 }
 
 h1 {
-    font-family: NanumMyeongjo, serif;
+    font-family: myfont;
     color: #fff;
     text-align: center;
     font-size: 56px;
@@ -39,7 +41,7 @@ hr {
 }
 
 footer p {
-    font-family: NanumMyeongjo, serif;
+    font-family: myfont;
     color: #fff;
     text-align: center;
     font-size: 24px;
@@ -62,7 +64,7 @@ footer {
 }
 
 .button {
-
+    font-family: myfont;
     background-color: #9DFCBB;
     color: black;
     border: none;
@@ -83,6 +85,7 @@ footer {
 }
 
 #Buttons{
+    font-family: myfont;
     display: flex;
     justify-content: center;
     align-items: center;

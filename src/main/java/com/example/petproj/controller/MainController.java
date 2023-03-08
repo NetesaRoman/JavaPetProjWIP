@@ -58,5 +58,9 @@ public class MainController {
         return "login";
     }
 
+    @GetMapping("/userProfile")
+    public String userProfile(){
+        return "userProfile";
+    }
 
 }

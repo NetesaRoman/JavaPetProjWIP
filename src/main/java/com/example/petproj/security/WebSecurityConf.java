@@ -47,17 +47,21 @@ public class WebSecurityConf {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers( "/login", "/welcome", "/registration", "/styles/**", "/img/**").permitAll()
+                        .requestMatchers( "/login", "/welcome", "/registration", "/styles/**","/fonts/**", "/img/**").permitAll()
+                        .requestMatchers("/userProfile").hasRole("USER")
 
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/welcome")
+                        .defaultSuccessUrl("/userProfile")
                         .permitAll()
                 )
                 .exceptionHandling().accessDeniedPage("/403").and()
-                .logout(LogoutConfigurer::permitAll);
+                .logout(LogoutConfigurer::permitAll)
+                .logout().logoutSuccessUrl("/welcome")
+        ;
+
 
 
         return http.build();
