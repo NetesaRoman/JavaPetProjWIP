@@ -246,3 +246,9 @@ header .button {
     background-color: #27ae60;
     color: white;
 }
+
+#workspace{
+    font-family: myfont;
+    margin-left: 15%;
+
+}
