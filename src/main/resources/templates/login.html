@@ -3,6 +3,7 @@
 <head >
     <meta charset="UTF-8">
     <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
+    <link rel="icon" type="image/x-icon" href="/img/leaf.png">
     <title>Registration</title>
 </head>
 <body>
@@ -11,10 +12,10 @@
     <form th:action="@{/login}" method="post">
 
                 <label for="email">E-mail:</label>
-                <input type="email" id="email" name="email">
+                <input type="email" id="email" name="username">
 
                 <label for="password1">Password:</label>
-                <input type="password" id="password1" name="password1">
+                <input type="password" id="password1" name="password">
 
                  <input type="submit"  value="submit">
     </form>

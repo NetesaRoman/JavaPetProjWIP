@@ -38,8 +38,6 @@ public class User {
     @Column
     private String password;
 
-    @Column
-    private String matchingPassword;
 
     @Column
     @Enumerated(EnumType.STRING)

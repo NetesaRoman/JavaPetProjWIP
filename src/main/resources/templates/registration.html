@@ -3,12 +3,13 @@
 <head >
     <meta charset="UTF-8">
     <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
+    <link rel="icon" type="image/x-icon" href="/img/leaf.png">
     <title>Registration</title>
 </head>
 <body>
 <div id="RegistrationForm">
     <h3>Registration form</h3>
-    <form>
+    <form th:action= "@{/registration}" method="post">
 
 
                 <label for="name">Name:</label>

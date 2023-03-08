@@ -1,7 +1,6 @@
 package com.example.petproj.dto;
 
 import com.example.petproj.model.UserRole;
-import com.example.petproj.validator.PasswordMatches;
 import com.example.petproj.validator.ValidEmail;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +16,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@PasswordMatches
 public class UserDto {
     @NotNull
     @NotEmpty
@@ -44,15 +42,17 @@ public class UserDto {
     @NotEmpty
     private String password;
 
-    @NotNull
-    @NotEmpty
-    private String matchingPassword;
 
     @NotNull
     @NotEmpty
     private UserRole role;
 
-
-
-
+    public UserDto(String name, String secondName, String phone, String email, String password, UserRole role) {
+        this.name = name;
+        this.secondName = secondName;
+        this.phone = phone;
+        this.email = email;
+        this.password = password;
+        this.role = role;
+    }
 }

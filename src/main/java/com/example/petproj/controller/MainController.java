@@ -2,6 +2,7 @@ package com.example.petproj.controller;
 
 import com.example.petproj.dto.UserDto;
 import com.example.petproj.model.User;
+import com.example.petproj.model.UserRole;
 import com.example.petproj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -12,6 +13,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,21 +40,23 @@ public class MainController {
     }
 
     @PostMapping("/registration")
-    public ModelAndView registerUserAccount(
-            @ModelAttribute("user") @Valid UserDto userDto,
-            HttpServletRequest request,
-            Errors errors) {
+    public String registerUserAccount(@RequestParam("name") String name, @RequestParam("surname") String surname,
+                                            @RequestParam("phone") String phone, @RequestParam("email") String email,
+                                            @RequestParam("password1") String password1,
+                                            @RequestParam("password2") String password2){
 
+        if(password1.equals(password2)){
+            userService.registerNewUserAccount(new UserDto( name, surname, phone, email, password1, UserRole.USER));
+        }
 
-        User registered = userService.registerNewUserAccount(userDto);
-        return new ModelAndView("successRegister", "user", userDto);
-
-        // rest of the implementation
+        return "login";
     }
 
 
     @GetMapping("/login")
-    public String login() {
+    public String loginPage() {
         return "login";
     }
+
+
 }

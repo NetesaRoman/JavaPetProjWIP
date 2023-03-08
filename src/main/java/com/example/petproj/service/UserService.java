@@ -5,6 +5,7 @@ import com.example.petproj.model.User;
 import com.example.petproj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 //import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /*
@@ -16,7 +17,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
 
-//    private final PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
 
 
@@ -39,7 +40,7 @@ public class UserService {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
-
+       user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(user);
     }
 
