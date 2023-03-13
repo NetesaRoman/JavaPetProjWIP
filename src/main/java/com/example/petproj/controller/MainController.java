@@ -63,4 +63,8 @@ public class MainController {
         return "userProfile";
     }
 
+    @GetMapping("/threads")
+    public String threads() {
+        return "threads";
+    }
 }

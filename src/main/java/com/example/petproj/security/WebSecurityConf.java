@@ -48,7 +48,7 @@ public class WebSecurityConf {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers( "/login", "/welcome", "/registration", "/styles/**","/fonts/**", "/img/**").permitAll()
-                        .requestMatchers("/userProfile").hasRole("USER")
+                        .requestMatchers("/userProfile", "/threads").hasRole("USER")
 
                 )
                 .formLogin((form) -> form

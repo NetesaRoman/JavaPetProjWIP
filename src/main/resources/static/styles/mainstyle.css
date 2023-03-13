@@ -252,3 +252,16 @@ header .button {
     margin-left: 15%;
 
 }
+
+#threads{
+    font-family: myfont;
+    background-color: #9DFCBB;
+    width: 1000px;
+    height: 700px;
+    border: 2px solid black;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
