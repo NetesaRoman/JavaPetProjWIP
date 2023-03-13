@@ -7,6 +7,7 @@ import com.example.petproj.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 /*
  *
@@ -64,7 +67,9 @@ public class MainController {
     }
 
     @GetMapping("/threads")
-    public String threads() {
+    public String threads(Model model) {
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
         return "threads";
     }
 }

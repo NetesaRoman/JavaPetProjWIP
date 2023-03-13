@@ -5,7 +5,7 @@
   <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
   <link rel="icon" type="image/x-icon" href="/img/leaf.png">
 
-  <title>profile</title>
+  <title>threads</title>
 </head>
 <body>
 
@@ -32,7 +32,9 @@
 </div>
 
 <div id = "threads">
-  <p>some txt</p>
+  <tr th:each="user : ${users}">
+    <td><p th:text="${user.name}"></p></td>
+  </tr>
 </div>
 
 <footer>

@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*
  *
  * @author Roman Netesa
@@ -47,5 +49,9 @@ public class UserService {
 
     private boolean emailExists(String email) {
         return userRepository.findByEmail(email) != null;
+    }
+
+    public List<User> findAll() {
+        return (List<User>) userRepository.findAll();
     }
 }
