@@ -34,9 +34,10 @@
 <div id = "workspace">
   <img src="/img/avatarPlaceholder.png" alt="Картинка" style="border-radius: 50%; width: 180px; height: 180px; float: left; margin-right: 10px;">
   <div>
-    <h2>Имя Фамилия</h2>
-    <p>Телефон: 123-456-7890<br>
-      Эл. почта: имя_фамилия@example.com</p>
+    <h2 th:text = "${user.name + ' ' + user.secondName}"> </h2>
+    <p th:text=" ${'Телефон: ' + user.phone}"></p>
+    <p th:text=" ${'Эл. почта: ' + user.email}"> </p>
+
   </div>
 </div>
 

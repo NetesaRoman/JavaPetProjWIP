@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
 /*
@@ -62,7 +63,11 @@ public class MainController {
     }
 
     @GetMapping("/userProfile")
-    public String userProfile(){
+    public String userProfile(Model model, Principal principal){
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        model.addAttribute("user", user);
+
         return "userProfile";
     }
 
