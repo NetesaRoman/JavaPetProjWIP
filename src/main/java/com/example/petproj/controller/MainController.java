@@ -77,4 +77,10 @@ public class MainController {
         model.addAttribute("users", users);
         return "threads";
     }
+
+    @GetMapping("/create")
+    public String threadsCreate() {
+
+        return "createThread";
+    }
 }
