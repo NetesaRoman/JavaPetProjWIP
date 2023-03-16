@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class VoteThreadService {
     private final VoteThreadRepository voteThreadRepository;
 
-    public VoteThreadDto addNewThread(VoteThreadDto voteThreadDto){
+    public void addNewThread(VoteThreadDto voteThreadDto){
         VoteThread voteThread = new VoteThread();
         voteThread.setAuthor(voteThreadDto.getAuthor());
         voteThread.setDislikes(0);
@@ -26,7 +26,6 @@ public class VoteThreadService {
 
         voteThreadRepository.save(voteThread);
         voteThreadDto.setId(voteThread.getId());
-        return voteThreadDto;
     }
     
 
