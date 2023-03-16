@@ -86,7 +86,7 @@ public class MainController {
     }
 
     @PostMapping("/create")
-    public String create(Principal principal,
+    public String create(Model model, Principal principal,
                          @RequestParam("name") String name, @RequestParam("description") String description) {
 
         String username = principal.getName();
@@ -98,6 +98,9 @@ public class MainController {
         voteThreadService.addNewThread(voteThreadDto);
         log.info("done");
 
+
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
         return "threads";
     }
 }

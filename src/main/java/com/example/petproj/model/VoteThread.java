@@ -30,6 +30,7 @@ public class VoteThread {
     private String description;
 
     @ManyToOne
+    @JoinColumn(name = "author")
     private User author;
 
     @Column
@@ -37,6 +38,5 @@ public class VoteThread {
 
     @Column
     private Integer dislikes;
-
 
 }

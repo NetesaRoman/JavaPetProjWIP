@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 /*
  *
  * @author Roman Netesa
@@ -42,4 +44,6 @@ public class User {
     @Column
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+
 }
