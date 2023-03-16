@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /*
  *
  * @author Roman Netesa
@@ -35,6 +37,9 @@ public class VoteThreadService {
         log.info("service save");
         voteThreadDto.setId(voteThread.getId());
     }
-    
 
+
+    public List<VoteThread> findAll() {
+       return (List<VoteThread>) voteThreadRepository.findAll();
+    }
 }

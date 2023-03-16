@@ -4,6 +4,7 @@ import com.example.petproj.dto.UserDto;
 import com.example.petproj.dto.VoteThreadDto;
 import com.example.petproj.model.User;
 import com.example.petproj.model.UserRole;
+import com.example.petproj.model.VoteThread;
 import com.example.petproj.service.UserService;
 import com.example.petproj.service.VoteThreadService;
 import lombok.extern.slf4j.Slf4j;
@@ -74,8 +75,15 @@ public class MainController {
 
     @GetMapping("/threads")
     public String threads(Model model) {
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+        List<VoteThread> votes = voteThreadService.findAll();
+        model.addAttribute("votes", votes);
+        return "threads";
+    }
+
+    @GetMapping("/threads/my")
+    public String threadsMy(Model model) {
+        List<VoteThread> votes = voteThreadService.findAll();
+        model.addAttribute("votes", votes);
         return "threads";
     }
 
