@@ -20,6 +20,7 @@ import org.springframework.web.context.request.WebRequest;
 import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 /*
  *
@@ -114,21 +115,24 @@ public class MainController {
         return "threads";
     }
 
-    @GetMapping("/showThread")
-    public String showThread() {
+
+
+    @GetMapping("/showThread/{id}")
+    public String showThread(@PathVariable("id") Integer id, Model model) {
+        Optional<VoteThread> vote = voteThreadService.findById(id);
+        model.addAttribute("vote", vote.get());
 
         return "showThread";
     }
 
-    @GetMapping("/showThread/{id}")
-    public String showRandomThread(@PathVariable("id") Integer id, Model model) {
 
+    @GetMapping("/showThread/random")
+    public String showRandomThread( Model model) {
 
-
-
-
-        Optional<VoteThread> vote = voteThreadService.findById(id);
-        model.addAttribute("vote", vote.get());
+        Random random = new Random();
+        List<VoteThread> votes = voteThreadService.findAll();
+        VoteThread vote = votes.get(random.nextInt(votes.size()));
+        model.addAttribute("vote", vote);
 
         return "showThread";
     }
