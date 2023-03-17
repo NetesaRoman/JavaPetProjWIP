@@ -50,7 +50,7 @@ public class WebSecurityConf {
                 .authorizeHttpRequests((requests) -> requests
 
                         .requestMatchers( "/login", "/welcome", "/registration", "/styles/**","/fonts/**", "/img/**").permitAll()
-                        .requestMatchers(HttpMethod.GET,"/userProfile", "/threads/**", "/create").hasRole("USER")
+                        .requestMatchers(HttpMethod.GET,"/userProfile", "/threads/**", "/create", "/showThread/**").hasRole("USER")
                         .requestMatchers( HttpMethod.POST,"/create").permitAll()
 
 

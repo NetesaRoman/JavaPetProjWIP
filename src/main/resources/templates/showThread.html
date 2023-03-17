@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head >
+    <meta charset="UTF-8">
+    <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
+    <link rel="icon" type="image/x-icon" href="/img/leaf.png">
+
+    <title>thread</title>
+</head>
+<body>
+
+<header>
+    <div class="site-name">MY SITE</div>
+    <div style="display: flex; justify-content: center;">
+        <form th:action= "@{/showThread/random}" method="get"><button style = "background-image: url('/img/random.png');" class="button"></button></form>
+        <form th:action= "@{/threads}" method="get"><button style = "background-image: url('/img/options-lines.png');" class="button"></button></form>
+        <form th:action= "@{/userProfile}" method="get"> <button style = "background-image: url('/img/user.png');" type = "submit" class="button"></button></form>
+        <form th:action= "@{/logout}" method="post"><button style = "background-image: url('/img/logout.png');" type = "submit" class="button"></button></form>
+
+
+    </div>
+</header>
+
+<div class="nav-menu">
+    <h2>Menu</h2>
+    <form th:action="@{/create}"><button type="submit" class="button">Create thread</button></form>
+    <form th:action="@{/threads}"><button type="submit" class="button">Popular</button></form>
+    <form th:action="@{/threads}"><button type="submit" class="button">Liked</button></form>
+    <form th:action="@{/threads}"><button type="submit" class="button">Disliked</button></form>
+    <form th:action="@{/threads}"><button type="submit" class="button">My threads</button></form>
+    <div class="vertical-line"></div>
+</div>
+
+<div class="container" id = "thread">
+    <div class="title" th:text="${vote.name}"></div>
+    <div class="line"></div>
+    <div class="text">
+        <p th:text="${vote.description}"></p>
+    </div>
+    <img class="image" src="/img/threadPlaceholder.jpg" alt="Пример изображения">
+</div>
+
+
+<footer>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: center;"></div>
+    <div style="width: 33%;  height: 100%; display: flex; align-items: center; justify-content: center; border-left: 1px solid #fff; border-right: 1px solid #fff;">
+        <p style = "font-size: 16px; color: white;">some txt about project like: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div style="width: 33%; height: 100%; display: flex; align-items: center; justify-content: right;">
+        <ul style="list-style-type: none; padding: 0; margin: 0; font-size: 16px;">
+            <li><a href="https://github.com/NetesaRoman" style="color: #fff;">My github</a></li>
+            <li><a href="#" style="color: #fff;"> Ссылка 2</a></li>
+            <li><a href="#" style="color: #fff;">Ссылка 3</a></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>

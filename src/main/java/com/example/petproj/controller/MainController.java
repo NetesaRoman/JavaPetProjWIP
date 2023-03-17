@@ -12,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 /*
  *
@@ -107,8 +109,27 @@ public class MainController {
         log.info("done");
 
 
-        List<User> users = userService.findAll();
-        model.addAttribute("users", users);
+        List<VoteThread> votes = voteThreadService.findAll();
+        model.addAttribute("votes", votes);
         return "threads";
+    }
+
+    @GetMapping("/showThread")
+    public String showThread() {
+
+        return "showThread";
+    }
+
+    @GetMapping("/showThread/{id}")
+    public String showRandomThread(@PathVariable("id") Integer id, Model model) {
+
+
+
+
+
+        Optional<VoteThread> vote = voteThreadService.findById(id);
+        model.addAttribute("vote", vote.get());
+
+        return "showThread";
     }
 }

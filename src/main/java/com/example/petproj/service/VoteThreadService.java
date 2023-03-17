@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
  *
@@ -41,5 +42,9 @@ public class VoteThreadService {
 
     public List<VoteThread> findAll() {
        return (List<VoteThread>) voteThreadRepository.findAll();
+    }
+
+    public Optional<VoteThread> findById(Integer id) {
+        return voteThreadRepository.findById(id);
     }
 }
