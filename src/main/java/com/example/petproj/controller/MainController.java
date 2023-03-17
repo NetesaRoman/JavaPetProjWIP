@@ -50,12 +50,12 @@ public class MainController {
 
     @PostMapping("/registration")
     public String registerUserAccount(@RequestParam("name") String name, @RequestParam("surname") String surname,
-                                            @RequestParam("phone") String phone, @RequestParam("email") String email,
-                                            @RequestParam("password1") String password1,
-                                            @RequestParam("password2") String password2){
+                                      @RequestParam("phone") String phone, @RequestParam("email") String email,
+                                      @RequestParam("password1") String password1,
+                                      @RequestParam("password2") String password2) {
 
-        if(password1.equals(password2)){
-            userService.registerNewUserAccount(new UserDto( name, surname, phone, email, password1, UserRole.USER));
+        if (password1.equals(password2)) {
+            userService.registerNewUserAccount(new UserDto(name, surname, phone, email, password1, UserRole.USER));
         }
 
         return "login";
@@ -68,7 +68,7 @@ public class MainController {
     }
 
     @GetMapping("/userProfile")
-    public String userProfile(Model model, Principal principal){
+    public String userProfile(Model model, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUserName(username);
         model.addAttribute("user", user);
@@ -84,8 +84,13 @@ public class MainController {
     }
 
     @GetMapping("/threads/my")
-    public String threadsMy(Model model) {
-        List<VoteThread> votes = voteThreadService.findAll();
+    public String threadsMy(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+
+        List<VoteThread> votes = voteThreadService.findAll().stream().filter(v -> v.getAuthor().equals(user)).toList();
+
+
         model.addAttribute("votes", votes);
         return "threads";
     }
@@ -116,7 +121,6 @@ public class MainController {
     }
 
 
-
     @GetMapping("/showThread/{id}")
     public String showThread(@PathVariable("id") Integer id, Model model) {
         Optional<VoteThread> vote = voteThreadService.findById(id);
@@ -127,7 +131,7 @@ public class MainController {
 
 
     @GetMapping("/showThread/random")
-    public String showRandomThread( Model model) {
+    public String showRandomThread(Model model) {
 
         Random random = new Random();
         List<VoteThread> votes = voteThreadService.findAll();
