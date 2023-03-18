@@ -71,7 +71,7 @@ public class MainController {
          User savedUser = userService.registerNewUserAccount(
                  new UserDto(name, surname, phone, email, password1, UserRole.USER, fileName));
 
-            String uploadDir = "static/img/user-photos" + savedUser.getId();
+            String uploadDir = "../../resources/static/user-photos" + savedUser.getId();
             try {
                 FileUploadUtil.saveFile(uploadDir, fileName, avatarFile);
             } catch (IOException e) {

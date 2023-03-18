@@ -49,7 +49,7 @@ public class WebSecurityConf {
         http    .httpBasic().and()
                 .authorizeHttpRequests((requests) -> requests
 
-                        .requestMatchers( "/login", "/welcome", "/registration", "/styles/**","/fonts/**", "/img/**").permitAll()
+                        .requestMatchers( "/login", "/welcome", "/registration","/user-photos/**","/styles/**","/fonts/**", "/img/**").permitAll()
                         .requestMatchers(HttpMethod.GET,"/userProfile", "/threads/**", "/create", "/showThread/**").hasRole("USER")
                         .requestMatchers( HttpMethod.POST,"/create").permitAll()
 

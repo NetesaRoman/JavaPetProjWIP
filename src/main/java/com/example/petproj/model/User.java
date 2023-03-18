@@ -48,11 +48,6 @@ public class User {
     @Column
     private String avatar;
 
-    @Transient
-    public String getPhotosImagePath() {
-        if (avatar == null || id == null) return null;
 
-        return "/user-photos/" + id + "/" + avatar;
-    }
 
 }

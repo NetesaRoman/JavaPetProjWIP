@@ -54,6 +54,7 @@ public class UserDto {
         this.phone = phone;
         this.email = email;
         this.password = password;
+        this.avatar = avatar;
         this.role = role;
     }
 }
