@@ -42,12 +42,13 @@ public class UserDto {
     @NotEmpty
     private String password;
 
+    private String avatar;
 
     @NotNull
     @NotEmpty
     private UserRole role;
 
-    public UserDto(String name, String secondName, String phone, String email, String password, UserRole role) {
+    public UserDto(String name, String secondName, String phone, String email, String password, UserRole role, String avatar) {
         this.name = name;
         this.secondName = secondName;
         this.phone = phone;

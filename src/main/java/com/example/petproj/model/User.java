@@ -45,5 +45,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column
+    private String avatar;
+
+    @Transient
+    public String getPhotosImagePath() {
+        if (avatar == null || id == null) return null;
+
+        return "/user-photos/" + id + "/" + avatar;
+    }
 
 }

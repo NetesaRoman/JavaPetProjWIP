@@ -30,10 +30,7 @@ public class UserService {
     }
 
     public User registerNewUserAccount(UserDto userDto)  {
-        if (emailExists(userDto.getEmail())) {
-//            throw new UserAlreadyExistException("There is an account with that email address: "
-//                    + userDto.getEmail());
-        }
+
 
         // the rest of the registration operation
         User user = new User();
@@ -42,6 +39,7 @@ public class UserService {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
+        user.setAvatar(userDto.getAvatar());
        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(user);
     }
