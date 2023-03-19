@@ -28,9 +28,13 @@ public class VoteThreadDto {
 
     private Integer dislikes;
 
-    public VoteThreadDto(String name, String description, User author) {
+    private byte[] imageData;
+
+
+    public VoteThreadDto(String name, String description, User author, byte[] imageData) {
         this.name = name;
         this.description = description;
         this.author = author;
+        this.imageData = imageData;
     }
 }

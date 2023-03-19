@@ -34,7 +34,7 @@
 
 <div id="CreateThreadForm">
   <h3>Creating thread</h3>
-  <form th:action= "@{/create}" method="post">
+  <form th:action= "@{/create}" method="post" enctype="multipart/form-data">
 
 
     <label for="name">Thread name:</label>
@@ -43,7 +43,8 @@
     <label for="description">Description:</label>
     <textarea type="text" id="description" name="description" rows="40" cols="150"></textarea>
 
-
+    <label for="image">Upload image (NOT required):</label>
+    <input type="file" id="image" name="threadImg" accept="image/png, image/jpeg"/>
 
     <input type="submit"  value="submit">
   </form>

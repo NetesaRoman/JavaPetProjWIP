@@ -8,7 +8,8 @@ CREATE TABLE IF NOT EXISTS vote_site.vote_thread
     description text,
     author integer constraint data_source_fk_connection_id_fkey references vote_site.user,
     likes int,
-    dislikes int
+    dislikes int,
+    image bytea
 );
 
 

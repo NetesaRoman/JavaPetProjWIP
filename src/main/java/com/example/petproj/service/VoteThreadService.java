@@ -29,6 +29,7 @@ public class VoteThreadService {
         voteThread.setDislikes(0);
         log.info("service disLikes");
         voteThread.setLikes(0);
+        voteThread.setImageData(voteThreadDto.getImageData());
         log.info("service likes");
         voteThread.setName(voteThreadDto.getName());
         log.info("service name " + voteThread.getName());

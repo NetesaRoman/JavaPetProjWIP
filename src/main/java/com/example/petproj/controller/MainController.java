@@ -59,11 +59,11 @@ public class MainController {
                                       @RequestParam("password2") String password2) throws IOException {
 
 
-        byte [] byteArr= Base64Utils.encode(avatarFile.getBytes());
+        byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
 
         if (password1.equals(password2)) {
-         User savedUser = userService.registerNewUserAccount(
-                 new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
+            User savedUser = userService.registerNewUserAccount(
+                    new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
 
 
         }
@@ -114,13 +114,16 @@ public class MainController {
 
     @PostMapping("/create")
     public String create(Model model, Principal principal,
-                         @RequestParam("name") String name, @RequestParam("description") String description) {
+                         @RequestParam("name") String name,
+                         @RequestParam("description") String description,
+                         @RequestParam(value = "threadImg", required = false) MultipartFile threadImageFile) throws IOException {
 
+        byte[] byteArr = Base64Utils.encode(threadImageFile.getBytes());
         String username = principal.getName();
         log.info(username);
         User user = userService.findByUserName(username);
         log.info(user.toString());
-        VoteThreadDto voteThreadDto = new VoteThreadDto(name, description, user);
+        VoteThreadDto voteThreadDto = new VoteThreadDto(name, description, user, byteArr);
         log.info(voteThreadDto.toString());
         voteThreadService.addNewThread(voteThreadDto);
         log.info("done");
@@ -136,6 +139,8 @@ public class MainController {
     public String showThread(@PathVariable("id") Integer id, Model model) {
         Optional<VoteThread> vote = voteThreadService.findById(id);
         model.addAttribute("vote", vote.get());
+
+        model.addAttribute("image", new String(vote.get().getImageData()));
 
         return "showThread";
     }

@@ -39,4 +39,7 @@ public class VoteThread {
     @Column
     private Integer dislikes;
 
+    @Column(name = "image", length = 1000)
+    private byte[] imageData;
+
 }

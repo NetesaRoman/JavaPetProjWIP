@@ -37,7 +37,7 @@
     <div class="text">
         <p th:text="${vote.description}"></p>
     </div>
-    <img class="image" src="/img/threadPlaceholder.jpg" alt="Пример изображения">
+    <img class="image" th:src="'data:image/png;base64,' + ${image}" alt="Картинка">
 </div>
 
 
