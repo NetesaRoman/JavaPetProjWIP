@@ -51,7 +51,7 @@ public class WebSecurityConf {
 
                         .requestMatchers( "/login", "/welcome", "/registration","/user-photos/**","/styles/**","/fonts/**", "/img/**").permitAll()
                         .requestMatchers("/userProfile", "/threads/**", "/create", "/showThread/**").hasRole("USER")
-
+                        .requestMatchers( HttpMethod.POST,"/create").permitAll()
 
 
                 )
