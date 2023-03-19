@@ -7,12 +7,11 @@ import com.example.petproj.model.UserRole;
 import com.example.petproj.model.VoteThread;
 import com.example.petproj.service.UserService;
 import com.example.petproj.service.VoteThreadService;
-import com.example.petproj.util.FileUploadUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Random;
 
@@ -58,25 +56,16 @@ public class MainController {
                                       @RequestParam("phone") String phone, @RequestParam("email") String email,
                                       @RequestParam(value = "avatar", required = false) MultipartFile avatarFile,
                                       @RequestParam("password1") String password1,
-                                      @RequestParam("password2") String password2) {
-        String fileName;
-        if (avatarFile != null){
-            fileName = StringUtils.cleanPath(Objects.requireNonNull(avatarFile.getOriginalFilename()));
-        }else {
-            fileName = "avatarPlaceholder.png";
-        }
+                                      @RequestParam("password2") String password2) throws IOException {
 
+
+        byte [] byteArr= Base64Utils.encode(avatarFile.getBytes());
 
         if (password1.equals(password2)) {
          User savedUser = userService.registerNewUserAccount(
-                 new UserDto(name, surname, phone, email, password1, UserRole.USER, fileName));
+                 new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
 
-            String uploadDir = "../../resources/static/user-photos" + savedUser.getId();
-            try {
-                FileUploadUtil.saveFile(uploadDir, fileName, avatarFile);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+
         }
 
         return "login";
@@ -93,6 +82,7 @@ public class MainController {
         String username = principal.getName();
         User user = userService.findByUserName(username);
         model.addAttribute("user", user);
+        model.addAttribute("avatar", new String(user.getImageData()));
 
         return "userProfile";
     }

@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS vote_site.user
     phone text,
     email text,
     role text,
-    password text
+    password text,
+    avatar bytea
 );
 
 

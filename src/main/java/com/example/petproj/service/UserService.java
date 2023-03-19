@@ -39,7 +39,7 @@ public class UserService {
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
-        user.setAvatar(userDto.getAvatar());
+        user.setImageData(userDto.getImageData());
        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(user);
     }

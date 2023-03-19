@@ -1,10 +1,12 @@
 package com.example.petproj.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 import java.util.List;
 
@@ -45,8 +47,9 @@ public class User {
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
-    @Column
-    private String avatar;
+
+    @Column(name = "avatar", length = 1000)
+    private byte[] imageData;
 
 
 

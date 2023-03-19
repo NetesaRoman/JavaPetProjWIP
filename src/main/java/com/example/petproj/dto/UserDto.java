@@ -42,19 +42,19 @@ public class UserDto {
     @NotEmpty
     private String password;
 
-    private String avatar;
+    private byte[] imageData;
 
     @NotNull
     @NotEmpty
     private UserRole role;
 
-    public UserDto(String name, String secondName, String phone, String email, String password, UserRole role, String avatar) {
+    public UserDto(String name, String secondName, String phone, String email, String password, UserRole role, byte[] imageData) {
         this.name = name;
         this.secondName = secondName;
         this.phone = phone;
         this.email = email;
         this.password = password;
-        this.avatar = avatar;
+        this.imageData = imageData;
         this.role = role;
     }
 }
