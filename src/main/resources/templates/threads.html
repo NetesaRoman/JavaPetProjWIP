@@ -35,9 +35,13 @@
   <tr th:each="vote : ${votes}">
 
     <td><form th:action="@{/showThread/{id}(id=${vote.id})}" method="get">
-      <div style=" width: 100%; height: 40px; border: 1px solid black;">
-      <img class="image" th:src="'data:image/png;base64,' + ${vote.imageData}" alt="Картинка" style="display: inline-block; float: left; border-radius: 50%; width: 40px; height: 40px;">
-      <button style="text-align: left; margin-top: 0; margin-bottom: 0; float: right; display: inline-block; width: 90%; height: 40px;" type="submit" class="button" th:text="${vote.authorName} + ':                 ' +  ${vote.name} + '------------' + ${vote.date} + ' ' + ${vote.time}">
+      <div style=" width: 100%; height: 50px; border: 1px solid black;">
+
+        <button style="text-align: left; margin-top: 0; margin-bottom: 0; float: right; display: inline-block; width: 100%; height: 50px;" type="submit" class="button" >
+          <img class="image" th:src="'data:image/png;base64,' + ${vote.imageData}" alt="Картинка" style="display: inline-block; float: left; border-radius: 50%; width: 40px; height: 40px;">
+
+          <p style=" margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${vote.authorName} + ':                 ' +  ${vote.name}"></p>
+          <p style=" margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${vote.date} + ' ' + ${vote.time}"></p>
       </button>
       </div>
 
