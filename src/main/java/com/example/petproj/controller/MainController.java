@@ -1,6 +1,7 @@
 package com.example.petproj.controller;
 
 import com.example.petproj.dto.UserDto;
+import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.dto.VoteThreadDto;
 import com.example.petproj.model.User;
 import com.example.petproj.model.UserRole;
@@ -89,7 +90,7 @@ public class MainController {
 
     @GetMapping("/threads")
     public String threads(Model model) {
-        List<VoteThread> votes = voteThreadService.findAll();
+        List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons();
         model.addAttribute("votes", votes);
         return "threads";
     }
@@ -99,7 +100,7 @@ public class MainController {
         String username = principal.getName();
         User user = userService.findByUserName(username);
 
-        List<VoteThread> votes = voteThreadService.findAll().stream().filter(v -> v.getAuthor().equals(user)).toList();
+        List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons().stream().filter(v -> v.getAuthor().equals(user)).toList();
 
 
         model.addAttribute("votes", votes);
@@ -129,9 +130,7 @@ public class MainController {
         log.info("done");
 
 
-        List<VoteThread> votes = voteThreadService.findAll();
-        model.addAttribute("votes", votes);
-        return "threads";
+        return threads(model);
     }
 
 

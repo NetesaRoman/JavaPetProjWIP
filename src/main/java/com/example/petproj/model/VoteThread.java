@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /*
  *
  * @author Roman Netesa
@@ -39,7 +42,13 @@ public class VoteThread {
     @Column
     private Integer dislikes;
 
-    @Column(name = "image", length = 1000)
+    @Column(name = "image")
     private byte[] imageData;
+
+    @Column(name="creation_date")
+    private LocalDate date;
+
+    @Column(name="creation_time")
+    private LocalTime time;
 
 }

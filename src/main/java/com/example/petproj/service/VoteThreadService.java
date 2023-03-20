@@ -1,5 +1,6 @@
 package com.example.petproj.service;
 
+import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.dto.VoteThreadDto;
 import com.example.petproj.model.VoteThread;
 import com.example.petproj.repository.VoteThreadRepository;
@@ -7,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +39,12 @@ public class VoteThreadService {
         log.info("service name " + voteThread.getName());
         voteThread.setDescription(voteThreadDto.getDescription());
         log.info("service description " + voteThread.getDescription());
+        voteThread.setDate(LocalDate.now());
+        voteThread.setTime(LocalTime.now());
+        log.info(voteThread.getDate().toString());
+        log.info(voteThread.getTime().toString());
         voteThreadRepository.save(voteThread);
+
         log.info("service save");
         voteThreadDto.setId(voteThread.getId());
     }
@@ -43,6 +52,28 @@ public class VoteThreadService {
 
     public List<VoteThread> findAll() {
        return (List<VoteThread>) voteThreadRepository.findAll();
+    }
+
+    public List<VoteThreadButtonDto> findAllForButtons() {
+        List<VoteThreadButtonDto> buttons = new ArrayList<>();
+         voteThreadRepository.findAll().forEach(voteThread -> buttons.add(makeButtonDto(voteThread)));
+
+         return buttons;
+    }
+
+    public VoteThreadButtonDto makeButtonDto(VoteThread voteThread){
+        VoteThreadButtonDto result = new VoteThreadButtonDto();
+        result.setDate(voteThread.getDate());
+        result.setTime(voteThread.getTime());
+        result.setName(voteThread.getName());
+        result.setId(voteThread.getId());
+        result.setLikes(voteThread.getLikes());
+        result.setDislikes(voteThread.getDislikes());
+        result.setAuthorName(voteThread.getAuthor().getName());
+        result.setImageData(new String(voteThread.getAuthor().getImageData()));
+        result.setAuthor(voteThread.getAuthor());
+
+        return result;
     }
 
     public Optional<VoteThread> findById(Integer id) {

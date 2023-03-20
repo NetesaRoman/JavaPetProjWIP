@@ -48,7 +48,7 @@ public class User {
     private UserRole role;
 
 
-    @Column(name = "avatar", length = 1000)
+    @Column(name = "avatar")
     private byte[] imageData;
 
 
