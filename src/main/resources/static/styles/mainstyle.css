@@ -364,3 +364,51 @@ header .button {
     margin: 0 auto;
     display: block;
 }
+
+#threadButtons{
+    margin-top: 3%;
+    margin-left: 38.5%;
+    font-family: myfont;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+}
+
+#threadButtons .button[id="Yes"] {
+    width: 200px;
+    height: 75px;
+    background-color: #76F5C4;
+    border-radius: 15px;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+#threadButtons .button[id="Yes"]:hover {
+    background-color: #6DD4AD;
+}
+
+#threadButtons .button[id="Yes"]:active {
+    background-color: #468A70;
+    color: white;
+}
+
+#threadButtons .button[id="No"] {
+    width: 200px;
+    height: 75px;
+    background-color: #F57A71;
+    border-radius: 15px;
+    color: black;
+    border: none;
+    cursor: pointer;
+}
+
+#threadButtons .button[id="No"]:hover {
+    background-color: #D0635B;
+}
+
+#threadButtons .button[id="No"]:active {
+    background-color: #9B4943;
+    color: white;
+}
