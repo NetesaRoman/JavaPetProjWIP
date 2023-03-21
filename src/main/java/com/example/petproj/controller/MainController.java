@@ -153,6 +153,7 @@ public class MainController {
         VoteThread vote = votes.get(random.nextInt(votes.size()));
         model.addAttribute("vote", vote);
 
+        model.addAttribute("image", new String(vote.getImageData()));
         return "showThread";
     }
 }
