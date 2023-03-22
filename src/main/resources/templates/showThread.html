@@ -39,8 +39,8 @@
     </div>
     <img style = "width: 500px; height: 300px;" class="image" th:src="'data:image/png;base64,' + ${image}" alt="Картинка">
     <div id="threadButtons">
-    <form th:action="@{/threads}"><button type="submit" id="Yes" class="button">YES</button></form>
-    <form th:action="@{/threads/my}"><button type="submit" id = "No" class="button">NO</button></form>
+    <form th:action="@{/like/{id}(id=${vote.id})}" method="post"><button type="submit" id="Yes" class="button">YES</button></form>
+    <form th:action="@{/dislike/{id}(id=${vote.id})}" method="post"><button type="submit" id = "No" class="button">NO</button></form>
     </div>
 
 </div>

@@ -144,6 +144,32 @@ public class MainController {
         return "showThread";
     }
 
+    @PostMapping("/like/{id}")
+    public String like(@PathVariable("id") Integer id, Model model){
+
+
+        Optional<VoteThread> vote = voteThreadService.findById(id);
+        vote.get().setLikes(vote.get().getLikes() + 1);
+        model.addAttribute("vote", vote.get());
+
+        model.addAttribute("image", new String(vote.get().getImageData()));
+
+        return "showThread";
+    }
+
+    @PostMapping("/dislike/{id}")
+    public String dislike(@PathVariable("id") Integer id, Model model){
+
+
+        Optional<VoteThread> vote = voteThreadService.findById(id);
+        vote.get().setDislikes(vote.get().getDislikes() + 1);
+        model.addAttribute("vote", vote.get());
+
+        model.addAttribute("image", new String(vote.get().getImageData()));
+
+        return "showThread";
+    }
+
 
     @GetMapping("/showThread/random")
     public String showRandomThread(Model model) {
