@@ -144,30 +144,23 @@ public class MainController {
         return "showThread";
     }
 
-    @PostMapping("/like/{id}")
+    @GetMapping("/like/{id}")
     public String like(@PathVariable("id") Integer id, Model model){
 
+        voteThreadService.like(id);
 
-        Optional<VoteThread> vote = voteThreadService.findById(id);
-        vote.get().setLikes(vote.get().getLikes() + 1);
-        model.addAttribute("vote", vote.get());
-
-        model.addAttribute("image", new String(vote.get().getImageData()));
-
-        return "showThread";
+        return "threads";
     }
 
-    @PostMapping("/dislike/{id}")
+    @GetMapping("/dislike/{id}")
     public String dislike(@PathVariable("id") Integer id, Model model){
 
 
         Optional<VoteThread> vote = voteThreadService.findById(id);
-        vote.get().setDislikes(vote.get().getDislikes() + 1);
-        model.addAttribute("vote", vote.get());
+        voteThreadService.dislike(vote.get());
 
-        model.addAttribute("image", new String(vote.get().getImageData()));
 
-        return "showThread";
+        return "threads";
     }
 
 

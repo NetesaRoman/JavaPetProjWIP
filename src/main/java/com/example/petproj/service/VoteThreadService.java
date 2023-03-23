@@ -79,4 +79,18 @@ public class VoteThreadService {
     public Optional<VoteThread> findById(Integer id) {
         return voteThreadRepository.findById(id);
     }
+
+
+    public void like(Integer id){
+        VoteThread voteThread = new VoteThread();
+        voteThread.setId(id);
+
+
+
+    }
+
+    public void dislike(VoteThread voteThread){
+        voteThread.setDislikes(voteThread.getDislikes() + 1);
+        voteThreadRepository.save(voteThread);
+    }
 }
