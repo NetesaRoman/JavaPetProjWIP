@@ -81,10 +81,49 @@ public class VoteThreadService {
     }
 
 
-    public void like(Integer id){
-        VoteThread voteThread = new VoteThread();
-        voteThread.setId(id);
+    public void like(VoteThreadDto voteThreadDto){
 
+        VoteThread voteThread = new VoteThread();
+        voteThread.setId(voteThreadDto.getId());
+        voteThread.setAuthor(voteThreadDto.getAuthor());
+
+        voteThread.setDislikes(voteThreadDto.getDislikes());
+
+        voteThread.setLikes(voteThreadDto.getLikes() + 1);
+        voteThread.setImageData(voteThreadDto.getImageData());
+
+        voteThread.setName(voteThreadDto.getName());
+
+        voteThread.setDescription(voteThreadDto.getDescription());
+
+        voteThread.setDate(voteThreadDto.getDate());
+        voteThread.setTime(voteThreadDto.getTime());
+
+        voteThreadRepository.save(voteThread);
+
+
+    }
+
+
+    public void dislike(VoteThreadDto voteThreadDto){
+
+        VoteThread voteThread = new VoteThread();
+        voteThread.setId(voteThreadDto.getId());
+        voteThread.setAuthor(voteThreadDto.getAuthor());
+
+        voteThread.setDislikes(voteThreadDto.getDislikes() + 1);
+
+        voteThread.setLikes(voteThreadDto.getLikes() );
+        voteThread.setImageData(voteThreadDto.getImageData());
+
+        voteThread.setName(voteThreadDto.getName());
+
+        voteThread.setDescription(voteThreadDto.getDescription());
+
+        voteThread.setDate(voteThreadDto.getDate());
+        voteThread.setTime(voteThreadDto.getTime());
+
+        voteThreadRepository.save(voteThread);
 
 
     }

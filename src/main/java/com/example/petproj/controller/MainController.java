@@ -144,23 +144,20 @@ public class MainController {
         return "showThread";
     }
 
-    @GetMapping("/like/{id}")
+    @PostMapping("/like/{id}")
     public String like(@PathVariable("id") Integer id, Model model){
 
-        voteThreadService.like(id);
+       voteThreadService.like(threadToDTO(id));
+       return showThread(id, model);
 
-        return "threads";
     }
 
-    @GetMapping("/dislike/{id}")
+    @PostMapping("/dislike/{id}")
     public String dislike(@PathVariable("id") Integer id, Model model){
 
+        voteThreadService.dislike(threadToDTO(id));
+        return showThread(id, model);
 
-        Optional<VoteThread> vote = voteThreadService.findById(id);
-        voteThreadService.dislike(vote.get());
-
-
-        return "threads";
     }
 
 
@@ -174,5 +171,21 @@ public class MainController {
 
         model.addAttribute("image", new String(vote.getImageData()));
         return "showThread";
+    }
+
+    private VoteThreadDto threadToDTO(Integer id){
+        Optional<VoteThread> voteThread = voteThreadService.findById(id);
+        VoteThreadDto voteThreadDto = new VoteThreadDto();
+        voteThreadDto.setId(id);
+        voteThreadDto.setLikes(voteThread.get().getLikes());
+        voteThreadDto.setDislikes(voteThread.get().getDislikes());
+        voteThreadDto.setDate(voteThread.get().getDate());
+        voteThreadDto.setTime(voteThread.get().getTime());
+        voteThreadDto.setDescription(voteThread.get().getDescription());
+        voteThreadDto.setAuthor(voteThread.get().getAuthor());
+        voteThreadDto.setName(voteThread.get().getName());
+        voteThreadDto.setImageData(voteThread.get().getImageData());
+
+        return voteThreadDto;
     }
 }
