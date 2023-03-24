@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 /*
  *
@@ -50,5 +51,11 @@ public class VoteThread {
 
     @Column(name="creation_time")
     private LocalTime time;
+
+    @ManyToMany(mappedBy = "liked")
+    private List<User> likeUsers;
+
+    @ManyToMany(mappedBy = "disliked")
+    private List<User> dislikeUsers;
 
 }

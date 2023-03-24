@@ -41,6 +41,10 @@ public class User {
 
     @Column
     private String password;
+    @ManyToMany(mappedBy = "likeUsers")
+    private List<VoteThread> liked;
+    @ManyToMany(mappedBy = "dislikeUsers")
+    private List<VoteThread> disliked;
 
 
     @Column
