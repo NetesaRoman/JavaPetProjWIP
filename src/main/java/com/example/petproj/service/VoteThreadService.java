@@ -2,6 +2,7 @@ package com.example.petproj.service;
 
 import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.dto.VoteThreadDto;
+import com.example.petproj.model.User;
 import com.example.petproj.model.VoteThread;
 import com.example.petproj.repository.VoteThreadRepository;
 import lombok.RequiredArgsConstructor;
@@ -81,7 +82,7 @@ public class VoteThreadService {
     }
 
 
-    public void like(VoteThreadDto voteThreadDto){
+    public void like(VoteThreadDto voteThreadDto, User user){
 
         VoteThread voteThread = new VoteThread();
         voteThread.setId(voteThreadDto.getId());
@@ -91,6 +92,11 @@ public class VoteThreadService {
 
         voteThread.setLikes(voteThreadDto.getLikes() + 1);
         voteThread.setImageData(voteThreadDto.getImageData());
+
+        voteThread.setLikeUsers(voteThreadDto.getLikeUsers());
+        voteThread.setDislikeUsers(voteThreadDto.getDislikeUsers());
+        voteThread.getLikeUsers().add(user);
+        user.getLiked().add(voteThread);
 
         voteThread.setName(voteThreadDto.getName());
 
@@ -105,7 +111,7 @@ public class VoteThreadService {
     }
 
 
-    public void dislike(VoteThreadDto voteThreadDto){
+    public void dislike(VoteThreadDto voteThreadDto, User user){
 
         VoteThread voteThread = new VoteThread();
         voteThread.setId(voteThreadDto.getId());

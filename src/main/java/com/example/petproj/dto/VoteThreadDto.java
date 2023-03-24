@@ -1,12 +1,14 @@
 package com.example.petproj.dto;
 
 import com.example.petproj.model.User;
+import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 
 /*
@@ -37,11 +39,29 @@ public class VoteThreadDto {
 
     private LocalTime time;
 
+    private List<User> likeUsers;
+
+    private List<User> dislikeUsers;
+
 
     public VoteThreadDto(String name, String description, User author, byte[] imageData) {
         this.name = name;
         this.description = description;
         this.author = author;
         this.imageData = imageData;
+
+    }
+
+    public boolean hasLiker(User user) {
+        if(likeUsers == null){
+            return false;
+        }
+
+        for(User u: likeUsers){
+            if(u.equals(user)){
+                return true;
+            }
+        }
+        return false;
     }
 }
