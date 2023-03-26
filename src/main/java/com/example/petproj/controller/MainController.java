@@ -151,6 +151,7 @@ public class MainController {
         User user = userService.findByUserName(username);
 
         VoteThreadDto voteThreadDto = threadToDTO(id);
+        log.info(voteThreadDto.getLikeUsers().toString());
         if(voteThreadDto.hasLiker(user)) {
 
             log.info("User already placed a like");
