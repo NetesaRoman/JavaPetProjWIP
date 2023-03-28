@@ -1,5 +1,6 @@
 package com.example.petproj.dto;
 
+import com.example.petproj.model.ThreadRating;
 import com.example.petproj.model.UserRole;
 import com.example.petproj.validator.ValidEmail;
 import jakarta.validation.constraints.NotEmpty;
@@ -7,6 +8,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Set;
 
 /*
  *
@@ -43,6 +46,8 @@ public class UserDto {
     private String password;
 
     private byte[] imageData;
+
+    private Set<ThreadRating> ratings;
 
     @NotNull
     @NotEmpty

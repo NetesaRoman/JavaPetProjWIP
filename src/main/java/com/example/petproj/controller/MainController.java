@@ -6,6 +6,7 @@ import com.example.petproj.dto.VoteThreadDto;
 import com.example.petproj.model.User;
 import com.example.petproj.model.UserRole;
 import com.example.petproj.model.VoteThread;
+import com.example.petproj.service.ThreadRatingService;
 import com.example.petproj.service.UserService;
 import com.example.petproj.service.VoteThreadService;
 import lombok.extern.slf4j.Slf4j;
@@ -38,26 +39,29 @@ public class MainController {
     private UserService userService;
 
     @Autowired
+    private ThreadRatingService threadRatingService;
+
+    @Autowired
     private VoteThreadService voteThreadService;
 
-    @GetMapping("/welcome" )
+    @GetMapping("/welcome")
     public String welcome() {
         return "welcome";
     }
 
-    @GetMapping("/registration" )
+    @GetMapping("/registration")
     public String registration(WebRequest request, Model model) {
         UserDto userDto = new UserDto();
         model.addAttribute("user", userDto);
         return "registration";
     }
 
-    @PostMapping("/registration" )
-    public String registerUserAccount(@RequestParam("name" ) String name, @RequestParam("surname" ) String surname,
-                                      @RequestParam("phone" ) String phone, @RequestParam("email" ) String email,
+    @PostMapping("/registration")
+    public String registerUserAccount(@RequestParam("name") String name, @RequestParam("surname") String surname,
+                                      @RequestParam("phone") String phone, @RequestParam("email") String email,
                                       @RequestParam(value = "avatar", required = false) MultipartFile avatarFile,
-                                      @RequestParam("password1" ) String password1,
-                                      @RequestParam("password2" ) String password2) throws IOException {
+                                      @RequestParam("password1") String password1,
+                                      @RequestParam("password2") String password2) throws IOException {
 
 
         byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
@@ -73,12 +77,12 @@ public class MainController {
     }
 
 
-    @GetMapping("/login" )
+    @GetMapping("/login")
     public String loginPage() {
         return "login";
     }
 
-    @GetMapping("/userProfile" )
+    @GetMapping("/userProfile")
     public String userProfile(Model model, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUserName(username);
@@ -88,14 +92,14 @@ public class MainController {
         return "userProfile";
     }
 
-    @GetMapping("/threads" )
+    @GetMapping("/threads")
     public String threads(Model model) {
         List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons();
         model.addAttribute("votes", votes);
         return "threads";
     }
 
-    @GetMapping("/threads/my" )
+    @GetMapping("/threads/my")
     public String threadsMy(Model model, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUserName(username);
@@ -107,16 +111,16 @@ public class MainController {
         return "threads";
     }
 
-    @GetMapping("/create" )
+    @GetMapping("/create")
     public String threadsCreate() {
 
         return "createThread";
     }
 
-    @PostMapping("/create" )
+    @PostMapping("/create")
     public String create(Model model, Principal principal,
-                         @RequestParam("name" ) String name,
-                         @RequestParam("description" ) String description,
+                         @RequestParam("name") String name,
+                         @RequestParam("description") String description,
                          @RequestParam(value = "threadImg", required = false) MultipartFile threadImageFile) throws IOException {
 
         byte[] byteArr = Base64Utils.encode(threadImageFile.getBytes());
@@ -127,15 +131,15 @@ public class MainController {
         VoteThreadDto voteThreadDto = new VoteThreadDto(name, description, user, byteArr);
         log.info(voteThreadDto.toString());
         voteThreadService.addNewThread(voteThreadDto);
-        log.info("done" );
+        log.info("done");
 
 
         return threads(model);
     }
 
 
-    @GetMapping("/showThread/{id}" )
-    public String showThread(@PathVariable("id" ) Integer id, Model model) {
+    @GetMapping("/showThread/{id}")
+    public String showThread(@PathVariable("id") Integer id, Model model) {
         Optional<VoteThread> vote = voteThreadService.findById(id);
         model.addAttribute("vote", vote.get());
 
@@ -144,37 +148,31 @@ public class MainController {
         return "showThread";
     }
 
-    @PostMapping("/like/{id}" )
-    public String like(@PathVariable("id" ) Integer id, Model model, Principal principal) {
+    @PostMapping("/like/{id}")
+    public String like(@PathVariable("id") Integer id, Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+
+        threadRatingService.rate(user.getId(), id, 1);
+        return showThread(id, model);
+
+
+    }
+
+    @PostMapping("/dislike/{id}")
+    public String dislike(@PathVariable("id") Integer id, Model model, Principal principal) {
 
         String username = principal.getName();
         User user = userService.findByUserName(username);
 
-        VoteThreadDto voteThreadDto = threadToDTO(id);
-        log.info(voteThreadDto.getLikeUsers().toString());
-        if(voteThreadDto.hasLiker(user)) {
-
-            log.info("User already placed a like");
-            return showThread(id, model);
-
-        }else {
-            voteThreadService.like(voteThreadDto, user);
-            log.info("User didnt place a like");
-            return showThread(id, model);
-        }
-
-    }
-
-    @PostMapping("/dislike/{id}" )
-    public String dislike(@PathVariable("id" ) Integer id, Model model) {
-
+        threadRatingService.rate(user.getId(), id, -1);
 
         return showThread(id, model);
 
     }
 
 
-    @GetMapping("/showThread/random" )
+    @GetMapping("/showThread/random")
     public String showRandomThread(Model model) {
 
         Random random = new Random();
@@ -190,10 +188,6 @@ public class MainController {
         Optional<VoteThread> voteThread = voteThreadService.findById(id);
         VoteThreadDto voteThreadDto = new VoteThreadDto();
         voteThreadDto.setId(id);
-        voteThreadDto.setLikes(voteThread.get().getLikes());
-        voteThreadDto.setDislikes(voteThread.get().getDislikes());
-        voteThreadDto.setLikeUsers(voteThread.get().getLikeUsers());
-        voteThreadDto.setDislikeUsers(voteThread.get().getDislikeUsers());
         voteThreadDto.setDate(voteThread.get().getDate());
         voteThreadDto.setTime(voteThread.get().getTime());
         voteThreadDto.setDescription(voteThread.get().getDescription());

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 
 import java.util.List;
+import java.util.Set;
 
 /*
  *
@@ -41,10 +42,7 @@ public class User {
 
     @Column
     private String password;
-    @ManyToMany
-    private List<VoteThread> liked;
-    @ManyToMany
-    private List<VoteThread> disliked;
+
 
 
     @Column
@@ -54,6 +52,9 @@ public class User {
 
     @Column(name = "avatar")
     private byte[] imageData;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ThreadRating> ratings;
 
 
 

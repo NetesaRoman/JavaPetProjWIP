@@ -9,6 +9,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Set;
 
 /*
  *
@@ -37,11 +38,6 @@ public class VoteThread {
     @JoinColumn(name = "author")
     private User author;
 
-    @Column
-    private Integer likes;
-
-    @Column
-    private Integer dislikes;
 
     @Column(name = "image")
     private byte[] imageData;
@@ -52,10 +48,7 @@ public class VoteThread {
     @Column(name="creation_time")
     private LocalTime time;
 
-    @ManyToMany(mappedBy = "liked")
-    private List<User> likeUsers;
-
-    @ManyToMany(mappedBy = "disliked")
-    private List<User> dislikeUsers;
+    @OneToMany(mappedBy = "voteThread")
+    private Set<ThreadRating> ratings;
 
 }

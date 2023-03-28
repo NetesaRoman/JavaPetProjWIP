@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,9 +32,7 @@ public class VoteThreadService {
         log.info("service new thread");
         voteThread.setAuthor(voteThreadDto.getAuthor());
         log.info("service got author " + voteThread.getAuthor().getName());
-        voteThread.setDislikes(0);
-        log.info("service disLikes");
-        voteThread.setLikes(0);
+
         voteThread.setImageData(voteThreadDto.getImageData());
         log.info("service likes");
         voteThread.setName(voteThreadDto.getName());
@@ -42,6 +41,7 @@ public class VoteThreadService {
         log.info("service description " + voteThread.getDescription());
         voteThread.setDate(LocalDate.now());
         voteThread.setTime(LocalTime.now());
+        voteThread.setRatings(voteThreadDto.getRatings());
         log.info(voteThread.getDate().toString());
         log.info(voteThread.getTime().toString());
         voteThreadRepository.save(voteThread);
@@ -68,8 +68,7 @@ public class VoteThreadService {
         result.setTime(voteThread.getTime());
         result.setName(voteThread.getName());
         result.setId(voteThread.getId());
-        result.setLikes(voteThread.getLikes());
-        result.setDislikes(voteThread.getDislikes());
+
         result.setAuthorName(voteThread.getAuthor().getName());
         result.setImageData(new String(voteThread.getAuthor().getImageData()));
         result.setAuthor(voteThread.getAuthor());
@@ -82,60 +81,6 @@ public class VoteThreadService {
     }
 
 
-    public void like(VoteThreadDto voteThreadDto, User user){
-
-        VoteThread voteThread = new VoteThread();
-        voteThread.setId(voteThreadDto.getId());
-        voteThread.setAuthor(voteThreadDto.getAuthor());
-
-        voteThread.setDislikes(voteThreadDto.getDislikes());
-
-        voteThread.setLikes(voteThreadDto.getLikes() + 1);
-        voteThread.setImageData(voteThreadDto.getImageData());
-
-        voteThread.setLikeUsers(voteThreadDto.getLikeUsers());
-        voteThread.setDislikeUsers(voteThreadDto.getDislikeUsers());
-        voteThread.getLikeUsers().add(user);
-        user.getLiked().add(voteThread);
-
-        voteThread.setName(voteThreadDto.getName());
-
-        voteThread.setDescription(voteThreadDto.getDescription());
-
-        voteThread.setDate(voteThreadDto.getDate());
-        voteThread.setTime(voteThreadDto.getTime());
-
-        voteThreadRepository.save(voteThread);
 
 
-    }
-
-
-    public void dislike(VoteThreadDto voteThreadDto, User user){
-
-        VoteThread voteThread = new VoteThread();
-        voteThread.setId(voteThreadDto.getId());
-        voteThread.setAuthor(voteThreadDto.getAuthor());
-
-        voteThread.setDislikes(voteThreadDto.getDislikes() + 1);
-
-        voteThread.setLikes(voteThreadDto.getLikes() );
-        voteThread.setImageData(voteThreadDto.getImageData());
-
-        voteThread.setName(voteThreadDto.getName());
-
-        voteThread.setDescription(voteThreadDto.getDescription());
-
-        voteThread.setDate(voteThreadDto.getDate());
-        voteThread.setTime(voteThreadDto.getTime());
-
-        voteThreadRepository.save(voteThread);
-
-
-    }
-
-    public void dislike(VoteThread voteThread){
-        voteThread.setDislikes(voteThread.getDislikes() + 1);
-        voteThreadRepository.save(voteThread);
-    }
 }
