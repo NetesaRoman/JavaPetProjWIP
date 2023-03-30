@@ -2,7 +2,6 @@ package com.example.petproj.dto;
 
 import com.example.petproj.model.ThreadRating;
 import com.example.petproj.model.User;
-import jakarta.persistence.ManyToMany;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
