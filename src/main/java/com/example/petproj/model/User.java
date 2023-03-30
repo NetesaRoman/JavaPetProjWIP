@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -43,7 +45,9 @@ public class User {
     @Column
     private String password;
 
-
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    private List<VoteThread> votes = new ArrayList<>();
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -53,7 +57,8 @@ public class User {
     @Column(name = "avatar")
     private byte[] imageData;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<ThreadRating> ratings;
 
 

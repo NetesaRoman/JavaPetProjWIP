@@ -2,7 +2,6 @@ package com.example.petproj.service;
 
 import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.dto.VoteThreadDto;
-import com.example.petproj.model.User;
 import com.example.petproj.model.VoteThread;
 import com.example.petproj.repository.VoteThreadRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,6 +78,17 @@ public class VoteThreadService {
         return voteThreadRepository.findById(id);
     }
 
+    public void deleteThread(Integer id){
+        voteThreadRepository.deleteById(id);
+    }
+
+    public void deleteThread(VoteThreadDto voteThreadDto){
+        voteThreadRepository.deleteById(voteThreadDto.getId());
+    }
+
+    public void deleteThread(VoteThread voteThread){
+        voteThreadRepository.delete(voteThread);
+    }
 
 
 

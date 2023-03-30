@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -48,7 +49,8 @@ public class VoteThread {
     @Column(name="creation_time")
     private LocalTime time;
 
-    @OneToMany(mappedBy = "voteThread")
+    @OneToMany(mappedBy = "voteThread", cascade = CascadeType.ALL)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<ThreadRating> ratings;
 
 }
