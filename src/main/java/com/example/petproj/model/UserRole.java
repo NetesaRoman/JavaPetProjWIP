@@ -6,5 +6,5 @@ package com.example.petproj.model;
  *
  */
 public enum UserRole {
-    ADMIN, USER;
+    ADMIN, USER, MODERATOR;
 }

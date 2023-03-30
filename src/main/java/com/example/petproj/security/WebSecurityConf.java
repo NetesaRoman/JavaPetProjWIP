@@ -45,6 +45,8 @@ public class WebSecurityConf {
 
                         .requestMatchers( "/login", "/welcome", "/registration","/user-photos/**","/styles/**","/fonts/**", "/img/**").permitAll()
                         .requestMatchers("/userProfile", "/threads/**", "/create", "/showThread/**", "/like/**", "/dislike/**").hasRole("USER")
+                        .requestMatchers("/userProfile", "/threads/**", "/create", "/showThread/**", "/like/**", "/dislike/**").hasRole("ADMIN")
+                        .requestMatchers("/userProfile", "/threads/**", "/create", "/showThread/**", "/like/**", "/dislike/**").hasRole("MODERATOR")
 
 
 
