@@ -48,9 +48,14 @@ public class ThreadController {
     }
 
     @GetMapping("/threads")
-    public String threads(Model model) {
+    public String threads(Model model, Principal principal) {
         List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons();
         model.addAttribute("votes", votes);
+
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+
+        model.addAttribute("user", user.getId());
         return "threads";
     }
 
@@ -71,7 +76,7 @@ public class ThreadController {
         log.info("done");
 
 
-        return threads(model);
+        return threads(model, principal);
     }
 
     @GetMapping("/threads/my")
