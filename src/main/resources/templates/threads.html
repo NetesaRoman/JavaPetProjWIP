@@ -52,7 +52,7 @@
     </form>
       </div>
       <div style="display: inline-block; margin-top: 0; margin-left: 25px; margin-bottom: 0;">
-      <form th:if="${vote.id == user}" style="float: right;margin-top: 0; margin-left: 0; margin-right: 50%;  display: inline-block; width:50px; height: 50px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
+      <form th:if="${vote.author.id == user}" style="float: right;margin-top: 0; margin-left: 0; margin-right: 50%;  display: inline-block; width:50px; height: 50px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
 
         <button id="deleteButton"  style = "background-image: url('/img/bin.png');" type="submit"></button>
 

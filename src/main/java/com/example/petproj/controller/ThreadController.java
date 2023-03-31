@@ -129,6 +129,7 @@ public class ThreadController {
     @PostMapping("/deleteThread/{id}")
     public String deleteThread(@PathVariable("id") Integer id, Model model, Principal principal) {
 
+        voteThreadService.deleteThread(id);
 
         return threads(model, principal);
     }
