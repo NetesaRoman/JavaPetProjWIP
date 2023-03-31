@@ -88,6 +88,7 @@ public class ThreadController {
 
 
         model.addAttribute("votes", votes);
+        model.addAttribute("user", user.getId());
         return "threads";
     }
 
@@ -125,6 +126,12 @@ public class ThreadController {
 
     }
 
+    @PostMapping("/deleteThread/{id}")
+    public String deleteThread(@PathVariable("id") Integer id, Model model, Principal principal) {
+
+
+        return threads(model, principal);
+    }
 
     @GetMapping("/showThread/random")
     public String showRandomThread(Model model) {
@@ -137,4 +144,6 @@ public class ThreadController {
         model.addAttribute("image", new String(vote.getImageData()));
         return "showThread";
     }
+
+
 }

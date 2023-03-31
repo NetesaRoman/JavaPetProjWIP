@@ -31,26 +31,34 @@
   <div class="vertical-line"></div>
 </div>
 
-<div id = "threads" style="overflow-y:scroll; overflow-x:hidden; height: 600px; width: 1000px;">
+<div id = "threads" style="overflow-y:scroll; overflow-x:hidden; height: 600px; width: 1060px;">
   <tr th:each="vote : ${votes}">
 
-    <td><form style="width:1000px;" th:action="@{/showThread/{id}(id=${vote.id})}" method="get">
-      <div style=" width: 1000px; height: 50px; border: 1px solid black;">
+    <td>
+      <div style="display: inline-block; margin-top: 0; margin-bottom: 0;">
+      <form style="width:960px;" th:action="@{/showThread/{id}(id=${vote.id})}" method="get">
+      <div style=" width: 960px; height: 50px; border: 1px solid black;">
 
-        <button style="  display: flex; float: left;   justify-content: left;   align-items: center;text-align: left; margin-top: 0;margin-right: 0; margin-bottom: 0;  width: 920px; height: 50px;" type="submit" class="button" >
+        <button style="  display: flex; float: left;   justify-content: left;   align-items: center;text-align: left; margin-top: 0;margin-right: 0; margin-bottom: 0;  width: 940px; height: 50px;" type="submit" class="button" >
           <img  class="image" th:src="'data:image/png;base64,' + ${vote.imageData}" alt="Картинка" style="display: flex;  margin-right: 5px; float: left; border-radius: 50%; width: 50px; height: 50px;">
 
-          <p style=" width: 630px; overflow-x:hidden; margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${vote.authorName} + ':                 ' +  ${vote.name}"></p>
+          <p style=" width: 600px; overflow-x:hidden; margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${vote.authorName} + ':                 ' +  ${vote.name}"></p>
          <div style=" width: 270px; justify-content: right; margin-left: 20%; text-align: right; "> <p style=" margin-top: 0; margin-bottom: 0;  text-align: right;  display: inline-block;" th:text="'' + ${vote.date} + ' ' + ${vote.time}"></p></div>
-          <form th:if="${vote.id == user}" style="float: left;margin-top: 0; margin-left: 0; margin-right: 50%;  display: inline-block; width:50px; height: 50px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
 
-            <button style="  display: flex;   justify-content: left;  margin-top: 0; float: left;  width: 50px; height: 50px;" type="submit">del</button>
-
-          </form>
       </button>
+
       </div>
 
-    </form></td>
+    </form>
+      </div>
+      <div style="display: inline-block; margin-top: 0; margin-left: 25px; margin-bottom: 0;">
+      <form th:if="${vote.id == user}" style="float: right;margin-top: 0; margin-left: 0; margin-right: 50%;  display: inline-block; width:50px; height: 50px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
+
+        <button id="deleteButton"  style = "background-image: url('/img/bin.png');" type="submit"></button>
+
+      </form>
+      </div>
+    </td>
 
   </tr>
 </div>
