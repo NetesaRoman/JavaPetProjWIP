@@ -31,19 +31,19 @@
   <div class="vertical-line"></div>
 </div>
 
-<div id = "threads" style="overflow-y:scroll; overflow-x:hidden; height: 600px; width: 1060px;">
+<div id = "threads" style="overflow-y:scroll; overflow-x:hidden; height: 600px; width: 1050px;">
   <tr th:each="vote : ${votes}">
 
     <td>
       <div style="display: inline-block; margin-top: 0; margin-bottom: 0;">
-      <form style="width:960px;" th:action="@{/showThread/{id}(id=${vote.id})}" method="get">
-      <div style=" width: 960px; height: 50px; border: 1px solid black;">
+      <form style="width:950px;" th:action="@{/showThread/{id}(id=${vote.id})}" method="get">
+      <div style=" width: 950px; height: 50px; border: 1px solid black;">
 
-        <button style="  display: flex; float: left;   justify-content: left;   align-items: center;text-align: left; margin-top: 0;margin-right: 0; margin-bottom: 0;  width: 940px; height: 50px;" type="submit" class="button" >
+        <button style="  display: flex; float: left;   justify-content: left; margin-left: 0;   align-items: center;text-align: left; margin-top: 0;margin-right: 0; margin-bottom: 0;  width: 950px; height: 50px;" type="submit" class="button" >
           <img  class="image" th:src="'data:image/png;base64,' + ${vote.imageData}" alt="Картинка" style="display: flex;  margin-right: 5px; float: left; border-radius: 50%; width: 50px; height: 50px;">
 
           <p style=" width: 600px; overflow-x:hidden; margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${vote.authorName} + ':                 ' +  ${vote.name}"></p>
-         <div style=" width: 270px; justify-content: right; margin-left: 20%; text-align: right; "> <p style=" margin-top: 0; margin-bottom: 0;  text-align: right;  display: inline-block;" th:text="'' + ${vote.date} + ' ' + ${vote.time}"></p></div>
+         <div style=" width: 250px; justify-content: right; margin-left: 20%; text-align: right; "> <p style=" margin-top: 0; margin-bottom: 0;  text-align: right;  display: inline-block;" th:text="'' + ${vote.date} + ' ' + ${vote.time}"></p></div>
 
       </button>
 
@@ -51,10 +51,10 @@
 
     </form>
       </div>
-      <div style="display: inline-block; margin-top: 0; margin-left: 25px; margin-bottom: 0;">
-      <form th:if="${vote.author.id == user}" style="float: right;margin-top: 0; margin-left: 0; margin-right: 50%;  display: inline-block; width:50px; height: 50px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
+      <div style="display: inline-block; margin-top: 0; width: 50px; height: 50px; margin-left: 0; border: 1px solid black; margin-bottom: 0;">
+      <form th:if="${vote.author.id == user}" style="float: right;margin-top: 0; margin-bottom: 0; margin-left: 0; display: inline-block; width:48px; height: 48px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
 
-        <button id="deleteButton"  style = "background-image: url('/img/bin.png');" type="submit"></button>
+        <button id="deleteButton"  style = "margin-top: 0; margin-bottom: 0; background-image: url('/img/bin.png');" type="submit"></button>
 
       </form>
       </div>
