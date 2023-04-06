@@ -32,6 +32,9 @@ import java.util.stream.Collectors;
 @Controller
 @Slf4j
 public class ThreadController {
+    private static final int LIKE = 1;
+    private static final int DISLIKE = -1;
+
     @Autowired
     private UserService userService;
 
@@ -97,7 +100,20 @@ public class ThreadController {
         String username = principal.getName();
         User user = userService.findByUserName(username);
         List<VoteThreadButtonDto> votes = new ArrayList<>();
-        Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == 1).collect(Collectors.toSet());
+        Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == LIKE).collect(Collectors.toSet());
+        likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
+
+        model.addAttribute("votes", votes);
+        model.addAttribute("user", user.getId());
+        return "threads";
+    }
+
+    @GetMapping("/threads/disliked")
+    public String threadsDisliked(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        List<VoteThreadButtonDto> votes = new ArrayList<>();
+        Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == DISLIKE).collect(Collectors.toSet());
         likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
 
         model.addAttribute("votes", votes);
@@ -122,7 +138,7 @@ public class ThreadController {
         String username = principal.getName();
         User user = userService.findByUserName(username);
 
-        threadRatingService.rate(user.getId(), id, 1);
+        threadRatingService.rate(user.getId(), id, LIKE);
         return showThread(id, model);
 
 
@@ -134,7 +150,7 @@ public class ThreadController {
         String username = principal.getName();
         User user = userService.findByUserName(username);
 
-        threadRatingService.rate(user.getId(), id, -1);
+        threadRatingService.rate(user.getId(), id, DISLIKE);
 
         return showThread(id, model);
 
