@@ -2,6 +2,7 @@ package com.example.petproj.controller;
 
 import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.dto.VoteThreadDto;
+import com.example.petproj.model.ThreadRating;
 import com.example.petproj.model.User;
 import com.example.petproj.model.VoteThread;
 import com.example.petproj.service.ThreadRatingService;
@@ -20,9 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /*
  *
@@ -91,6 +91,20 @@ public class ThreadController {
         model.addAttribute("user", user.getId());
         return "threads";
     }
+
+    @GetMapping("/threads/liked")
+    public String threadsLiked(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        List<VoteThreadButtonDto> votes = new ArrayList<>();
+        Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == 1).collect(Collectors.toSet());
+        likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
+
+        model.addAttribute("votes", votes);
+        model.addAttribute("user", user.getId());
+        return "threads";
+    }
+
 
 
     @GetMapping("/showThread/{id}")
