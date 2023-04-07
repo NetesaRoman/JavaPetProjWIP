@@ -15,14 +15,21 @@
 <div th:insert="~{fragments/nav-menu :: nav-menu}"></div>
 
 <div id="workspace">
+    <div style="position: relative; display: flex;">
     <img th:src="'data:image/png;base64,' + ${avatar}" alt="Картинка"
          style="border-radius: 50%; width: 180px; height: 180px; float: left; margin-right: 10px;">
-    <div>
-        <h2 th:text="${user.name + ' ' + user.secondName}"></h2>
-        <p th:text=" ${'Телефон: ' + user.phone}"></p>
-        <p th:text=" ${'Эл. почта: ' + user.email}"></p>
+    <form th:action="@{/userProfile/edit}" method="get" style="position: absolute; height: 40px; width: 40px; bottom: -5px; left: 110px;">
+        <button id = "editButton"  class="button"></button>
+    </form>
 
+        <div>
+            <h2 th:text="${user.name + ' ' + user.secondName}"></h2>
+            <p th:text=" ${'Телефон: ' + user.phone}"></p>
+            <p th:text=" ${'Эл. почта: ' + user.email}"></p>
+
+        </div>
     </div>
+
 </div>
 
 <div th:insert="~{fragments/footer :: footer}"></div>

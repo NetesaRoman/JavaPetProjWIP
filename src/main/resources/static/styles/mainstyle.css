@@ -432,3 +432,25 @@ header .button {
 #deleteButton:active {
     background-color: #27ae60;
 }
+
+#editButton{
+    background-size: 60% 60%;
+    background-position-x: 50%;
+    background-position-y: 50%;
+    background-color: #9DFCBB;
+    background-image: url('../img/pencil.png');
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#editButton:hover {
+    background-color: #2ecc71;
+}
+
+#editButton:active {
+    background-color: #27ae60;
+}
