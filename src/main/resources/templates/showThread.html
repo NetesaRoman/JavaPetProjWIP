@@ -11,15 +11,7 @@
 
 <div th:insert="~{fragments/header :: header}"></div>
 
-<div class="nav-menu">
-    <h2>Menu</h2>
-    <form th:action="@{/create}"><button type="submit" class="button">Create thread</button></form>
-    <form th:action="@{/threads}"><button type="submit" class="button">Popular</button></form>
-    <form th:action="@{/threads/liked}"><button type="submit" class="button">Liked</button></form>
-    <form th:action="@{/threads/disliked}"><button type="submit" class="button">Disliked</button></form>
-    <form th:action="@{/threads/my}"><button type="submit" class="button">My threads</button></form>
-    <div class="vertical-line"></div>
-</div>
+<div th:insert="~{fragments/nav-menu :: nav-menu}"></div>
 
 <div class="container" id = "thread">
     <div class="title" th:text="${vote.name}"></div>
