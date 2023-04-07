@@ -34,7 +34,7 @@
     </form>
       </div>
       <div style="display: inline-block; margin-top: 0; width: 50px; height: 50px; margin-left: 0; border: 1px solid black; margin-bottom: 0;">
-      <form th:if="${vote.author.id == user}" style="float: right;margin-top: 0; margin-bottom: 0; left: -4px; display: inline-block; width:48px; height: 48px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
+      <form th:if="${vote.author.id == user.id || isAdmin || isModerator  }" style="float: right;margin-top: 0; margin-bottom: 0; left: -4px; display: inline-block; width:48px; height: 48px" th:action="@{/deleteThread/{id}(id=${vote.id})}" method="post">
 
         <button id="deleteButton"  style = "margin-top: 0; margin-bottom: 0; left: -4px; background-image: url('/img/bin.png');" type="submit"></button>
 

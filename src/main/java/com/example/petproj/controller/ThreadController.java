@@ -57,8 +57,12 @@ public class ThreadController {
 
         String username = principal.getName();
         User user = userService.findByUserName(username);
+        boolean isModerator = user.getRole().name().equals("MODERATOR");
+        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
-        model.addAttribute("user", user.getId());
+        model.addAttribute("isModerator", isModerator);
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("user", user);
         return "threads";
     }
 
@@ -89,9 +93,13 @@ public class ThreadController {
 
         List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons().stream().filter(v -> v.getAuthor().equals(user)).toList();
 
+        boolean isModerator = user.getRole().name().equals("MODERATOR");
+        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
+        model.addAttribute("isModerator", isModerator);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
-        model.addAttribute("user", user.getId());
+        model.addAttribute("user", user);
         return "threads";
     }
 
@@ -102,9 +110,13 @@ public class ThreadController {
         List<VoteThreadButtonDto> votes = new ArrayList<>();
         Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == LIKE).collect(Collectors.toSet());
         likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
+        boolean isModerator = user.getRole().name().equals("MODERATOR");
+        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
+        model.addAttribute("isModerator", isModerator);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
-        model.addAttribute("user", user.getId());
+        model.addAttribute("user", user);
         return "threads";
     }
 
@@ -116,8 +128,13 @@ public class ThreadController {
         Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == DISLIKE).collect(Collectors.toSet());
         likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
 
+        boolean isModerator = user.getRole().name().equals("MODERATOR");
+        boolean isAdmin = user.getRole().name().equals("ADMIN");
+
+        model.addAttribute("isModerator", isModerator);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
-        model.addAttribute("user", user.getId());
+        model.addAttribute("user", user);
         return "threads";
     }
 
