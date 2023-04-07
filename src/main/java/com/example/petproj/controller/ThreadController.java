@@ -45,8 +45,10 @@ public class ThreadController {
     private VoteThreadService voteThreadService;
 
     @GetMapping("/create")
-    public String threadsCreate() {
-
+    public String threadsCreate(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        model.addAttribute("user", user);
         return "createThread";
     }
 
@@ -57,11 +59,9 @@ public class ThreadController {
 
         String username = principal.getName();
         User user = userService.findByUserName(username);
-        boolean isModerator = user.getRole().name().equals("MODERATOR");
-        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
-        model.addAttribute("isModerator", isModerator);
-        model.addAttribute("isAdmin", isAdmin);
+
+        model.addAttribute("votes", votes);
         model.addAttribute("user", user);
         return "threads";
     }
@@ -76,13 +76,14 @@ public class ThreadController {
         String username = principal.getName();
         log.info(username);
         User user = userService.findByUserName(username);
+
         log.info(user.toString());
         VoteThreadDto voteThreadDto = new VoteThreadDto(name, description, user, byteArr);
         log.info(voteThreadDto.toString());
         voteThreadService.addNewThread(voteThreadDto);
         log.info("done");
 
-
+        model.addAttribute("user", user);
         return threads(model, principal);
     }
 
@@ -93,11 +94,7 @@ public class ThreadController {
 
         List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons().stream().filter(v -> v.getAuthor().equals(user)).toList();
 
-        boolean isModerator = user.getRole().name().equals("MODERATOR");
-        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
-        model.addAttribute("isModerator", isModerator);
-        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
         model.addAttribute("user", user);
         return "threads";
@@ -110,15 +107,12 @@ public class ThreadController {
         List<VoteThreadButtonDto> votes = new ArrayList<>();
         Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == LIKE).collect(Collectors.toSet());
         likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
-        boolean isModerator = user.getRole().name().equals("MODERATOR");
-        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
-        model.addAttribute("isModerator", isModerator);
-        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
         model.addAttribute("user", user);
         return "threads";
     }
+
 
     @GetMapping("/threads/disliked")
     public String threadsDisliked(Model model, Principal principal) {
@@ -128,20 +122,19 @@ public class ThreadController {
         Set<ThreadRating> likes = user.getRatings().stream().filter(r -> r.getRating() == DISLIKE).collect(Collectors.toSet());
         likes.forEach(l -> votes.add(voteThreadService.makeButtonDto(voteThreadService.findById(l.getVoteThread().getId()).get())));
 
-        boolean isModerator = user.getRole().name().equals("MODERATOR");
-        boolean isAdmin = user.getRole().name().equals("ADMIN");
 
-        model.addAttribute("isModerator", isModerator);
-        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("votes", votes);
         model.addAttribute("user", user);
         return "threads";
     }
 
 
-
     @GetMapping("/showThread/{id}")
-    public String showThread(@PathVariable("id") Integer id, Model model) {
+    public String showThread(@PathVariable("id") Integer id, Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        model.addAttribute("user", user);
+
         Optional<VoteThread> vote = voteThreadService.findById(id);
         model.addAttribute("vote", vote.get());
 
@@ -156,7 +149,7 @@ public class ThreadController {
         User user = userService.findByUserName(username);
 
         threadRatingService.rate(user.getId(), id, LIKE);
-        return showThread(id, model);
+        return showThread(id, model, principal);
 
 
     }
@@ -169,7 +162,7 @@ public class ThreadController {
 
         threadRatingService.rate(user.getId(), id, DISLIKE);
 
-        return showThread(id, model);
+        return showThread(id, model, principal);
 
     }
 
@@ -182,16 +175,22 @@ public class ThreadController {
     }
 
     @GetMapping("/showThread/random")
-    public String showRandomThread(Model model) {
+    public String showRandomThread(Model model, Principal principal) {
+
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+
 
         Random random = new Random();
         List<VoteThread> votes = voteThreadService.findAll();
         VoteThread vote = votes.get(random.nextInt(votes.size()));
         model.addAttribute("vote", vote);
+        model.addAttribute("user", user);
 
         model.addAttribute("image", new String(vote.getImageData()));
         return "showThread";
     }
+
 
 
 }

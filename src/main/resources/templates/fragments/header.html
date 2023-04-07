@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -21,6 +21,9 @@
             <button style="background-image: url('/img/logout.png');" type="submit" class="button"></button>
         </form>
 
+        <form th:if="${isAdminOrModerator}" th:action="@{/logout}" method="post">
+            <button style="background-image: url('/img/delete.png');" type="submit" class="button"></button>
+        </form>
 
     </div>
 </header>

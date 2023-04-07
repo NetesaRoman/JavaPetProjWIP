@@ -1,8 +1,7 @@
 package com.example.petproj.controller;
 
-import com.example.petproj.dto.UserDto;
+
 import com.example.petproj.model.User;
-import com.example.petproj.model.UserRole;
 import com.example.petproj.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +46,7 @@ public class MainController {
     }
 
     @GetMapping("/userProfile/edit")
-    public String editProfile(Model model, Principal principal){
+    public String editProfile(Model model, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUserName(username);
         model.addAttribute("user", user);
@@ -67,12 +66,13 @@ public class MainController {
         byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
 
 
-            userService.updateUser(user.getId(),name, surname, phone, byteArr);
-
-
+        userService.updateUser(user.getId(), name, surname, phone, byteArr);
+        model.addAttribute("user", user);
 
         return welcome();
     }
+
+
 
 
 }
