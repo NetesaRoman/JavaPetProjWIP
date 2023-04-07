@@ -9,17 +9,7 @@
 </head>
 <body>
 
-<header>
-  <div class="site-name">MY SITE</div>
-  <div style="display: flex; justify-content: center;">
-      <form th:action= "@{/showThread/random}" method="get"><button style = "background-image: url('/img/random.png');" class="button"></button></form>
-    <form th:action= "@{/threads}" method="get"><button style = "background-image: url('/img/options-lines.png');" class="button"></button></form>
-    <form th:action= "@{/userProfile}" method="get"> <button style = "background-image: url('/img/user.png');" type = "submit" class="button"></button></form>
-    <form th:action= "@{/logout}" method="post"><button style = "background-image: url('/img/logout.png');" type = "submit" class="button"></button></form>
-
-
-  </div>
-</header>
+<div th:insert="~{fragments/header :: header}"></div>
 
 <div class="nav-menu">
   <h2>Menu</h2>
