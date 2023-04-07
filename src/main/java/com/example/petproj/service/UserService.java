@@ -8,6 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /*
  *
@@ -22,13 +23,11 @@ public class UserService {
     private final UserRepository userRepository;
 
 
-
-
     public boolean hasUserByName(String name) {
-        return  userRepository.existsUserByName(name);
+        return userRepository.existsUserByName(name);
     }
 
-    public User registerNewUserAccount(UserDto userDto)  {
+    public User registerNewUserAccount(UserDto userDto) {
 
 
         // the rest of the registration operation
@@ -39,7 +38,7 @@ public class UserService {
         user.setEmail(userDto.getEmail());
         user.setRole(userDto.getRole());
         user.setImageData(userDto.getImageData());
-       user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userRepository.save(user);
     }
 
@@ -54,5 +53,20 @@ public class UserService {
 
     public User findByUserName(String username) {
         return userRepository.findByName(username);
+    }
+
+    public void updateUser(Integer id, String name, String surname, String phone, byte[] byteArr) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+
+            user.setImageData(byteArr);
+            user.setName(name);
+            user.setPhone(phone);
+            user.setSecondName(surname);
+
+            userRepository.save(user);
+        }
+
     }
 }

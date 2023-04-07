@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
+    <link rel="icon" type="image/x-icon" href="/img/leaf.png">
+
+    <title>profile</title>
+</head>
+<body>
+
+<div th:insert="~{fragments/header :: header}"></div>
+
+<div th:insert="~{fragments/nav-menu :: nav-menu}"></div>
+
+<div id="workspace">
+    <div id="EditProfileForm">
+        <h3>Edit profile</h3>
+        <form th:action= "@{/userProfile/edit}" method="post" enctype="multipart/form-data">
+
+
+            <label for="name">New name:</label>
+            <input type="text" id="name" name="name">
+
+            <label for="surname">New second name:</label>
+            <input type="text" id="surname" name="surname">
+
+            <label for="phone">New phone number:</label>
+            <input type="text" id="phone" name="phone">
+
+            <label for="avatar">Upload new image (NOT required):</label>
+            <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg"/>
+
+            <input type="submit"  value="submit">
+        </form>
+    </div>
+
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

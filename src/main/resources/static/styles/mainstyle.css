@@ -454,3 +454,47 @@ header .button {
 #editButton:active {
     background-color: #27ae60;
 }
+
+#EditProfileForm{
+    width: 800px;
+    height: 350px;
+    margin-top: 3%;
+    margin-left: 17%;
+    background-color: #9DFCBB;
+    border: 1px solid black;
+    padding: 20px;
+    font-family: myfont;
+    color: black;
+}
+
+#EditProfileForm [type="submit"] {
+
+    width: 150px;
+    height: 45px;
+    margin-top: 15px;
+    margin-left: 80%;
+    background-color: #006620;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+
+    cursor: pointer;
+}
+
+#EditProfileForm input[type="submit"]:hover {
+    background-color: #004d1a;
+}
+
+#EditProfileForm input[type="submit"]:active {
+    background-color: #003311;
+}
+
+#EditProfileForm label {
+    display: block;
+}
+
+#EditProfileForm input {
+    width: 100%;
+    height: 30px;
+}
+
