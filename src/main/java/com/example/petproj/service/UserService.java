@@ -1,12 +1,15 @@
 package com.example.petproj.service;
 
+import com.example.petproj.dto.UserButtonDto;
 import com.example.petproj.dto.UserDto;
+import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.model.User;
 import com.example.petproj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,5 +71,28 @@ public class UserService {
             userRepository.save(user);
         }
 
+    }
+
+    public User findById(Integer id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return optionalUser.orElse(null);
+    }
+
+    public List<UserButtonDto> findAllForButtons(){
+        List<UserButtonDto> buttons = new ArrayList<>();
+        userRepository.findAll().forEach(user -> buttons.add(makeButtonDto(user)));
+
+        return buttons;
+    }
+
+    public UserButtonDto makeButtonDto(User user){
+        UserButtonDto userButtonDto = new UserButtonDto();
+
+        userButtonDto.setId(user.getId());
+        userButtonDto.setName(user.getName());
+        userButtonDto.setSecondName(user.getSecondName());
+        userButtonDto.setImageData(new String(user.getImageData()));
+
+        return userButtonDto;
     }
 }

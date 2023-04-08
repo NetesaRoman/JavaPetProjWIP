@@ -55,7 +55,7 @@ public class ThreadController {
     @GetMapping("/threads")
     public String threads(Model model, Principal principal) {
         List<VoteThreadButtonDto> votes = voteThreadService.findAllForButtons();
-        model.addAttribute("votes", votes);
+
 
         String username = principal.getName();
         User user = userService.findByUserName(username);

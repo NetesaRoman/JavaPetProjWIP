@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head >
+  <meta charset="UTF-8">
+  <link href="/styles/mainstyle.css" rel="stylesheet" th:href="@{/styles/mainstyle.css}">
+  <link rel="icon" type="image/x-icon" href="/img/leaf.png">
+
+  <title>threads</title>
+</head>
+<body>
+
+<div th:with="isAdminOrModerator=${userClient.role.name() == 'ADMIN'}">
+  <div th:with="isAdminOrModerator=${isAdminOrModerator}"  th:replace="~{fragments/header :: header(isAdminOrmoderator = ${isAdminOrModerator})}"></div>
+</div>
+
+
+<div th:insert="~{fragments/nav-menu :: nav-menu}"></div>
+
+<div id = "threads" style="overflow-y:scroll; overflow-x:hidden; height: 600px; width: 1030px;">
+  <tr th:each="user : ${users}">
+
+    <td>
+      <div style="display: inline-block; margin-top: 0; margin-bottom: 0;">
+      <form style="width:950px;" th:action="@{/userProfile/{id}(id=${user.id})}" method="get">
+      <div style=" width: 950px; height: 50px; border: 1px solid black;">
+
+        <button style="  display: flex; float: left;   justify-content: left; margin-left: 0;   align-items: center;text-align: left; margin-top: 0;margin-right: 0; margin-bottom: 0;  width: 950px; height: 50px;" type="submit" class="button" >
+          <img  class="image" th:src="'data:image/png;base64,' + ${user.imageData}" alt="Картинка" style="display: flex;  margin-right: 5px; float: left; border-radius: 50%; width: 50px; height: 50px;">
+
+          <p style=" width: 600px; overflow-x:hidden; margin-top: 0; margin-bottom: 0; display: inline-block;" th:text="${user.name} + ' ' +  ${user.secondName}"></p>
+
+      </button>
+
+      </div>
+
+    </form>
+      </div>
+      <div style="display: inline-block; margin-top: 0; width: 50px; height: 50px; margin-left: 0; border: 1px solid black; margin-bottom: 0;">
+      <form th:if="${userClient.role.name() == 'ADMIN'}" style="float: right;margin-top: 0; margin-bottom: 0; left: -4px; display: inline-block; width:48px; height: 48px" th:action="@{/deleteUser/{id}(id=${user.id})}" method="post">
+
+        <button id="deleteButton"  style = "margin-top: 0; margin-bottom: 0; left: -4px; background-image: url('/img/bin.png');" type="submit"></button>
+
+      </form>
+      </div>
+    </td>
+
+  </tr>
+</div>
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+</body>
+</html>

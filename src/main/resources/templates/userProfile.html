@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<div th:with="isAdminOrModerator=${ user.role.name() == 'ADMIN'}">
+<div th:with="isAdminOrModerator=${ client.role.name() == 'ADMIN'}">
     <div th:with="isAdminOrModerator=${isAdminOrModerator}"  th:replace="~{fragments/header :: header(isAdminOrmoderator = ${isAdminOrModerator})}"></div>
 </div>
 
@@ -21,7 +21,7 @@
     <div style="position: relative; display: flex;">
     <img th:src="'data:image/png;base64,' + ${avatar}" alt="Картинка"
          style="border-radius: 50%; width: 180px; height: 180px; float: left; margin-right: 10px;">
-    <form th:action="@{/userProfile/edit}" method="get" style="position: absolute; height: 40px; width: 40px; bottom: -5px; left: 110px;">
+    <form th:if="${isOwner}" th:action="@{/userProfile/edit}" method="get" style="position: absolute; height: 40px; width: 40px; bottom: -5px; left: 110px;">
         <button id = "editButton"  class="button"></button>
     </form>
 
