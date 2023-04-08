@@ -106,7 +106,11 @@ public class MainController {
         return welcome();
     }
 
-
+    @PostMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable("id") Integer id, Model model, Principal principal){
+        userService.deleteUser(id);
+        return showUsers(model, principal);
+    }
 
 
 }
