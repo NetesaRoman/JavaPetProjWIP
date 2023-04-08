@@ -9,8 +9,10 @@
     <title>profile</title>
 </head>
 <body>
+<div th:with="isAdminOrModerator=${ user.role.name() == 'ADMIN'}">
+    <div th:with="isAdminOrModerator=${isAdminOrModerator}"  th:replace="~{fragments/header :: header(isAdminOrmoderator = ${isAdminOrModerator})}"></div>
+</div>
 
-<div th:with="isAdminOrModerator=${ user.role == 'ADMIN'}" th:replace="~{fragments/header :: header}"></div>
 <div th:insert="~{fragments/nav-menu :: nav-menu}"></div>
 
 <div id="workspace">
