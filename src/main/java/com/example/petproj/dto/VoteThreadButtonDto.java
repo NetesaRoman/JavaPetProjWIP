@@ -1,6 +1,7 @@
 package com.example.petproj.dto;
 
 import com.example.petproj.model.User;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,5 +36,8 @@ public class VoteThreadButtonDto {
     private LocalTime time;
 
     private User author;
+
+    @Column
+    private Integer rating;
 
 }

@@ -70,6 +70,7 @@ public class VoteThreadService {
         result.setAuthorName(voteThread.getAuthor().getName());
         result.setImageData(new String(voteThread.getAuthor().getImageData()));
         result.setAuthor(voteThread.getAuthor());
+        result.setRating(voteThread.getRating());
 
         return result;
     }

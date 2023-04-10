@@ -2,6 +2,7 @@ package com.example.petproj.dto;
 
 import com.example.petproj.model.ThreadRating;
 import com.example.petproj.model.User;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,6 +48,8 @@ public class VoteThreadDto {
 
     private Set<ThreadRating> ratings;
 
+    @Column
+    private Integer rating;
 
     public VoteThreadDto(String name, String description, User author, byte[] imageData) {
         this.name = name;

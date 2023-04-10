@@ -48,6 +48,9 @@ public class VoteThread {
     @Column(name="creation_time")
     private LocalTime time;
 
+    @Column
+    private Integer rating = 0;
+
     @OneToMany(mappedBy = "voteThread", cascade = CascadeType.ALL)
     @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<ThreadRating> ratings;
