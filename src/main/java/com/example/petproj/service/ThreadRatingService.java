@@ -38,7 +38,7 @@ public class ThreadRatingService {
             if (threadRatingRepository.findById(ratingKey).isPresent()) {
                 threadRating = threadRatingRepository.findById(ratingKey).get();
                 threadRating.setRating(mark);
-                updateThreadRating(voteThread);
+
 
             } else {
                 threadRating = new ThreadRating();
@@ -47,10 +47,11 @@ public class ThreadRatingService {
                 threadRating.setUser(user);
                 threadRating.setVoteThread(voteThread);
                 voteThread.setRating(voteThread.getRating() + mark);
-                updateThreadRating(voteThread);
+
             }
 
             threadRatingRepository.save(threadRating);
+            updateThreadRating(voteThread);
 
         } else {
             log.error("Couldn't find user or thread");
