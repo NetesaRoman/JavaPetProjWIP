@@ -92,7 +92,7 @@ footer {
 
     width: 150px;
     height: 45px;
-    margin-top: 20px;
+    margin-bottom: 200px;
     margin-left: 64%;
     background-color: #006620;
     color: #fff;
@@ -498,3 +498,24 @@ header .button {
     height: 30px;
 }
 
+#ButtonForLogin input[type="submit"] {
+
+    width: 80px;
+    height: 35px;
+    margin-top: 20px;
+    margin-left: 64%;
+    background-color: #006620;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+
+    cursor: pointer;
+}
+
+#ButtonForLogin input[type="submit"]:hover {
+    background-color: #004d1a;
+}
+
+#ButtonForLogin input[type="submit"]:active {
+    background-color: #003311;
+}

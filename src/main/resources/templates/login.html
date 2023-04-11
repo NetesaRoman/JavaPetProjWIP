@@ -7,6 +7,13 @@
     <title>Login</title>
 </head>
 <body>
+<div id="ButtonForLogin" style="display: flex; margin-left: 40% ; height: 50px">
+    <h3>Don't have any account?</h3>
+    <form th:action= "@{/registration}" method="get">
+        <input type="submit"  value="sign up">
+    </form>
+</div>
+
 <div id="LoginForm">
     <h3>Login</h3>
     <form th:action="@{/login}" method="post">

@@ -7,7 +7,18 @@
     <title>Registration</title>
 </head>
 <body>
-<div id="RegistrationForm">
+
+<div id="ButtonForLogin" style="display: flex; margin-left: 40% ; height: 50px">
+    <h3>Already have an account?</h3>
+    <form th:action= "@{/login}" method="get">
+        <input type="submit"  value="log in">
+    </form>
+</div>
+
+
+<div th:insert="~{fragments/footer :: footer}"></div>
+
+<div id="RegistrationForm" >
     <h3>Registration form</h3>
     <form th:action= "@{/registration}" method="post" enctype="multipart/form-data">
 
@@ -37,8 +48,5 @@
     </form>
 </div>
 
-
-
-<div th:insert="~{fragments/footer :: footer}"></div>
 </body>
 </html>
