@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 /*
  *
@@ -42,9 +44,22 @@ public class AuthenticationController {
                                       @RequestParam(value = "avatar", required = false) MultipartFile avatarFile,
                                       @RequestParam("password1") String password1,
                                       @RequestParam("password2") String password2) throws IOException {
+        byte[] byteArr = null;
+        if(avatarFile.isEmpty()) {
+            try {
+                File file = new File("user.png");
+                byteArr = Files.readAllBytes(file.toPath());
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }else {
+            byteArr = Base64Utils.encode(avatarFile.getBytes());
+        }
 
 
-        byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
+
+
 
         if (password1.equals(password2)) {
             userService.registerNewUserAccount(new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
