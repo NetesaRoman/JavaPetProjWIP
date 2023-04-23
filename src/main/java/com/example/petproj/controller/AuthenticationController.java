@@ -14,8 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 
 /*
@@ -47,8 +53,13 @@ public class AuthenticationController {
         byte[] byteArr = null;
         if(avatarFile.isEmpty()) {
             try {
-                File file = new File("user.png");
-                byteArr = Files.readAllBytes(file.toPath());
+
+                InputStream inputStream = getClass().getResourceAsStream("/static/img/avatar_placeholder.png");
+                BufferedImage bufferedImage = ImageIO.read(inputStream);
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                ImageIO.write(bufferedImage, "png", baos);
+
+                byteArr = Base64Utils.encode(baos.toByteArray());
 
             } catch (Exception e) {
                 e.printStackTrace();
