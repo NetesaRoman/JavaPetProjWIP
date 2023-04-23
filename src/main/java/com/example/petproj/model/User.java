@@ -45,8 +45,8 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+
     private List<VoteThread> votes = new ArrayList<>();
 
     @Column
@@ -57,8 +57,8 @@ public class User {
     @Column(name = "avatar")
     private byte[] imageData;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
+
     private Set<ThreadRating> ratings;
 
 

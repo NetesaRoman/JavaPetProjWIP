@@ -1,6 +1,7 @@
 package com.example.petproj.controller;
 
 import com.example.petproj.dto.UserDto;
+import com.example.petproj.model.User;
 import com.example.petproj.model.UserRole;
 import com.example.petproj.service.UserService;
 import jakarta.servlet.ServletException;
@@ -30,6 +31,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
+import java.security.Principal;
 
 /*
  *
@@ -56,7 +58,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/registration")
-    public void registerUserAccount(HttpServletRequest request, @RequestParam("name") String name, @RequestParam("surname") String surname,
+    public String registerUserAccount(HttpServletRequest request,Model model,Principal principal, @RequestParam("name") String name, @RequestParam("surname") String surname,
                                     @RequestParam("phone") String phone, @RequestParam("email") String email,
                                     @RequestParam(value = "avatar", required = false) MultipartFile avatarFile,
                                     @RequestParam("password1") String password1,
@@ -91,9 +93,22 @@ public class AuthenticationController {
             } catch (ServletException e) {
                 e.printStackTrace();
             }
+
+            return userProfile(model, principal);
         }
+        return "registration";
+
+    }
 
 
+    public String userProfile(Model model, Principal principal) {
+        String username = principal.getName();
+        User user = userService.findByUserName(username);
+        model.addAttribute("client", user);
+        model.addAttribute("user", user);
+        model.addAttribute("avatar", new String(user.getImageData()));
+        model.addAttribute("isOwner", true);
+        return "userProfile";
     }
 
 
