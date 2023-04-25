@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -109,5 +110,14 @@ public class UserController {
     public String deleteUser(@PathVariable("id") Integer id, Model model, Principal principal){
         userService.deleteUser(id);
         return showUsers(model, principal);
+    }
+
+    @PostMapping("/userProfile/edit_profile/{id}")
+    public RedirectView editUserRole(@PathVariable("id") Integer id, @RequestParam("role") String newRole){
+        userService.setRole(id, newRole);
+
+
+
+        return new RedirectView("/userProfile/" + id);
     }
 }

@@ -33,9 +33,14 @@
         <div>
             <h2 th:text="${user.name + ' ' + user.secondName}"></h2>
             <h2 th:text="${user.role.name()}"></h2>
-            <form th:if="${ client.role.name() == 'ADMIN'}" th:action="@{/userProfile/edit}" method="get"
+            <form th:if="${ client.role.name() == 'ADMIN'}" th:action="@{/userProfile/edit_profile/{id}(id=${user.id})}" method="post"
                   style="position: absolute; height: 100px; width: 250px; bottom: 50px; left: 410px;">
-                <button id="editRoleButton" class="button"></button>
+                <select id="role" name="role">
+                    <option value="ADMIN">ADMIN</option>
+                    <option value="MODERATOR">MODERATOR</option>
+                    <option value="USER">USER</option>
+                </select>
+                <button  type="submit" id="editRoleButton" class="button"> Save</button>
             </form>
             <p th:text=" ${'Телефон: ' + user.phone}"></p>
             <p th:text=" ${'Эл. почта: ' + user.email}"></p>

@@ -4,6 +4,7 @@ import com.example.petproj.dto.UserButtonDto;
 import com.example.petproj.dto.UserDto;
 import com.example.petproj.dto.VoteThreadButtonDto;
 import com.example.petproj.model.User;
+import com.example.petproj.model.UserRole;
 import com.example.petproj.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -98,5 +99,11 @@ public class UserService {
 
     public void deleteUser(Integer id){
         userRepository.deleteById(id);
+    }
+
+    public void setRole(Integer id, String newRole){
+        User user = userRepository.findById(id).orElseThrow();
+        user.setRole(UserRole.valueOf(newRole));
+        userRepository.save(user);
     }
 }
