@@ -59,7 +59,7 @@ public class UserService {
         return userRepository.findByName(username);
     }
 
-    public void updateUser(Integer id, String name, String surname, String phone, byte[] byteArr) {
+    public void  updateUser(Integer id, String name, String surname, String phone, byte[] byteArr) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -69,7 +69,7 @@ public class UserService {
             user.setPhone(phone);
             user.setSecondName(surname);
 
-            userRepository.save(user);
+
         }
 
     }

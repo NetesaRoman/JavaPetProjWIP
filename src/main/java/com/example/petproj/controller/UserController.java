@@ -32,6 +32,8 @@ public class UserController {
     private UserService userService;
 
 
+
+
     @GetMapping("/userProfile")
     public String userProfile(Model model, Principal principal) {
         String username = principal.getName();
@@ -83,7 +85,7 @@ public class UserController {
     }
 
     @PostMapping("/userProfile/edit")
-    public String postEditProfile(Model model, Principal principal,
+    public RedirectView postEditProfile(Model model, Principal principal,
                                   @RequestParam("name") String name, @RequestParam("surname") String surname,
                                   @RequestParam("phone") String phone,
                                   @RequestParam(value = "avatar", required = false) MultipartFile avatarFile) throws IOException {
@@ -92,29 +94,22 @@ public class UserController {
         User user = userService.findByUserName(username);
         byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
 
-
-
         userService.updateUser(user.getId(), name, surname, phone, byteArr);
-        user = userService.findByUserName(username);
 
 
-        model.addAttribute("client", user);
-        model.addAttribute("user", user);
-        model.addAttribute("avatar", new String(user.getImageData()));
-        model.addAttribute("isOwner", true);
-
-        return "redirect:/userProfile";
+        return new RedirectView("/welcome");
     }
 
     @PostMapping("/deleteUser/{id}")
-    public String deleteUser(@PathVariable("id") Integer id, Model model, Principal principal){
+    public RedirectView deleteUser(@PathVariable("id") Integer id, Model model, Principal principal){
         userService.deleteUser(id);
-        return showUsers(model, principal);
+        return new RedirectView("/users");
     }
 
     @PostMapping("/userProfile/edit_profile/{id}")
     public RedirectView editUserRole(@PathVariable("id") Integer id, @RequestParam("role") String newRole){
         userService.setRole(id, newRole);
+
 
 
 
