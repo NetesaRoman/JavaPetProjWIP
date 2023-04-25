@@ -58,7 +58,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/registration")
-    public String registerUserAccount(HttpServletRequest request,Model model,Principal principal, @RequestParam("name") String name, @RequestParam("surname") String surname,
+    public String registerUserAccount(HttpServletRequest request,Model model, @RequestParam("name") String name, @RequestParam("surname") String surname,
                                     @RequestParam("phone") String phone, @RequestParam("email") String email,
                                     @RequestParam(value = "avatar", required = false) MultipartFile avatarFile,
                                     @RequestParam("password1") String password1,
@@ -86,7 +86,8 @@ public class AuthenticationController {
 
 
         if (password1.equals(password2)) {
-            userService.registerNewUserAccount(new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
+
+           User user = userService.registerNewUserAccount(new UserDto(name, surname, phone, email, password1, UserRole.USER, byteArr));
 
             try {
                 request.login(email, password1);
@@ -94,22 +95,16 @@ public class AuthenticationController {
                 e.printStackTrace();
             }
 
-            return userProfile(model, principal);
+            model.addAttribute("user", user);
+            return "main";
         }
-        return "registration";
+
+        return "main";
 
     }
 
 
-    public String userProfile(Model model, Principal principal) {
-        String username = principal.getName();
-        User user = userService.findByUserName(username);
-        model.addAttribute("client", user);
-        model.addAttribute("user", user);
-        model.addAttribute("avatar", new String(user.getImageData()));
-        model.addAttribute("isOwner", true);
-        return "userProfile";
-    }
+
 
 
     @GetMapping("/login")
