@@ -538,3 +538,16 @@ header .button {
 #editRoleButton:active {
     background-color: #27ae60;
 }
+
+#mainTable{
+    font-family: myfont;
+    background-color: #9DFCBB;
+    width: 1000px;
+    height: 700px;
+    border: 2px solid black;
+    border-collapse: collapse;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
