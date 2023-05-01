@@ -2,7 +2,7 @@ package com.example.petproj.service;
 
 import com.example.petproj.dto.UserButtonDto;
 import com.example.petproj.dto.UserDto;
-import com.example.petproj.dto.VoteThreadButtonDto;
+
 import com.example.petproj.model.User;
 import com.example.petproj.model.UserRole;
 import com.example.petproj.repository.UserRepository;
@@ -37,6 +37,7 @@ public class UserService {
         // the rest of the registration operation
         User user = new User();
         user.setName(userDto.getName());
+        user.setProfileName(userDto.getName());
         user.setSecondName(userDto.getSecondName());
         user.setPhone(userDto.getPhone());
         user.setEmail(userDto.getEmail());
@@ -65,10 +66,13 @@ public class UserService {
             User user = optionalUser.get();
 
             user.setImageData(byteArr);
-            user.setName(name);
+
+
+            user.setProfileName(name);
             user.setPhone(phone);
             user.setSecondName(surname);
 
+            userRepository.save(user);
 
         }
 
@@ -90,7 +94,7 @@ public class UserService {
         UserButtonDto userButtonDto = new UserButtonDto();
 
         userButtonDto.setId(user.getId());
-        userButtonDto.setName(user.getName());
+        userButtonDto.setName(user.getProfileName());
         userButtonDto.setSecondName(user.getSecondName());
         userButtonDto.setImageData(new String(user.getImageData()));
 

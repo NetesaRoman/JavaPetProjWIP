@@ -33,6 +33,9 @@ public class User {
     @Column
     private String name;
 
+    @Column(name = "profile_name")
+    private String profileName;
+
     @Column(name = "second_name")
     private String secondName;
 

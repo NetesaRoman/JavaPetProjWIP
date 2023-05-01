@@ -26,6 +26,10 @@ public class UserDto {
 
     @NotNull
     @NotEmpty
+    private String profileName;
+
+    @NotNull
+    @NotEmpty
     private String name;
 
     @NotNull

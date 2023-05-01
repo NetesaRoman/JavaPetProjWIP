@@ -3,6 +3,7 @@ package com.example.petproj.controller;
 import com.example.petproj.dto.UserButtonDto;
 import com.example.petproj.model.User;
 import com.example.petproj.service.UserService;
+import jakarta.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,17 +33,21 @@ public class UserController {
     private UserService userService;
 
 
-
-
     @GetMapping("/userProfile")
     public String userProfile(Model model, Principal principal) {
         String username = principal.getName();
+
+        log.error(username);
         User user = userService.findByUserName(username);
+
         model.addAttribute("client", user);
         model.addAttribute("user", user);
         model.addAttribute("avatar", new String(user.getImageData()));
         model.addAttribute("isOwner", true);
         return "userProfile";
+
+
+
     }
 
     @GetMapping("/userProfile/{id}")
@@ -60,7 +65,7 @@ public class UserController {
     }
 
     @GetMapping("users")
-    public String showUsers(Model model, Principal principal){
+    public String showUsers(Model model, Principal principal) {
 
         List<UserButtonDto> users = userService.findAllForButtons();
 
@@ -86,31 +91,29 @@ public class UserController {
 
     @PostMapping("/userProfile/edit")
     public RedirectView postEditProfile(Model model, Principal principal,
-                                  @RequestParam("name") String name, @RequestParam("surname") String surname,
-                                  @RequestParam("phone") String phone,
-                                  @RequestParam(value = "avatar", required = false) MultipartFile avatarFile) throws IOException {
+                                        @RequestParam("name") String name, @RequestParam("surname") String surname,
+                                        @RequestParam("phone") String phone,
+                                        @RequestParam(value = "avatar", required = false) MultipartFile avatarFile) throws IOException {
 
         String username = principal.getName();
         User user = userService.findByUserName(username);
         byte[] byteArr = Base64Utils.encode(avatarFile.getBytes());
 
-        userService.updateUser(user.getId(), name, surname, phone, byteArr);
+        userService.updateUser(user.getId(), name,  surname, phone, byteArr);
 
 
-        return new RedirectView("/welcome");
+        return new RedirectView("/userProfile");
     }
 
     @PostMapping("/deleteUser/{id}")
-    public RedirectView deleteUser(@PathVariable("id") Integer id, Model model, Principal principal){
+    public RedirectView deleteUser(@PathVariable("id") Integer id, Model model, Principal principal) {
         userService.deleteUser(id);
         return new RedirectView("/users");
     }
 
     @PostMapping("/userProfile/edit_profile/{id}")
-    public RedirectView editUserRole(@PathVariable("id") Integer id, @RequestParam("role") String newRole){
+    public RedirectView editUserRole(@PathVariable("id") Integer id, @RequestParam("role") String newRole) {
         userService.setRole(id, newRole);
-
-
 
 
         return new RedirectView("/userProfile/" + id);
