@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import java.util.ArrayList;
@@ -48,8 +50,8 @@ public class User {
     @Column
     private String password;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
-
+    @OneToMany(mappedBy = "author",  cascade = CascadeType.REMOVE)
+    @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private List<VoteThread> votes = new ArrayList<>();
 
     @Column

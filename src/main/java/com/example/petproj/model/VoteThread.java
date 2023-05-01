@@ -51,7 +51,7 @@ public class VoteThread {
     @Column
     private Integer rating = 0;
 
-    @OneToMany(mappedBy = "voteThread", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "voteThread", cascade = CascadeType.REMOVE)
     @Cascade(org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<ThreadRating> ratings;
 
