@@ -67,7 +67,7 @@ public class VoteThreadService {
         result.setName(voteThread.getName());
         result.setId(voteThread.getId());
 
-        result.setAuthorName(voteThread.getAuthor().getName());
+        result.setAuthorName(voteThread.getAuthor().getProfileName());
         result.setImageData(new String(voteThread.getAuthor().getImageData()));
         result.setAuthor(voteThread.getAuthor());
         result.setRating(voteThread.getRating());
